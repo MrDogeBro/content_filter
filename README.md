@@ -11,7 +11,7 @@ or define a whole new list of words to filter for.
     * [Removing Words from the Filter](#removing-words-from-the-filter)
     * [Using a Custom Filter](#using-a-custom-filter)
 1. [Examples](#examples)
-
+1. [License](#license)
 
 ## Installation
 To install Content Filter, enter the following command in any sort of terminal window as long as you have Python 3 installed on your computer.
@@ -97,3 +97,6 @@ content_filter.checkMessage('Holy s***!')
 content_filter.checkMessage('Hi, how are you doing today?')
 # True
 ```
+
+## License
+The Content Filter module for Python is licensed under an [MIT license](/blob/master/LICENSE).
