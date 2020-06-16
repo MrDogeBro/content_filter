@@ -14,9 +14,7 @@ In the examples listed below, words have been bleeped out with \*'s which the fi
 
 #### Example #1
 This is a basic example of how you could use content filter. In this example, we are just checking a message against the built in filter with no modification to the filter.
-<pre><code>
-  import content_filter
-
+<pre lang=python><code>import content_filter
   content_filter.checkMessage('It is a beautiful day outside.')
   # False
 
