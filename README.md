@@ -8,3 +8,11 @@ To install Content Filter, enter the following command in a terminal window.
 ```
 $ pip install content-filter
 ```
+
+## Usage
+```python
+import content_filter
+
+content_filter.checkMessage('Hello there!')
+# False
+```
