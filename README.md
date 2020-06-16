@@ -19,9 +19,7 @@ This is a basic example of how you could use content filter. In this example, we
   content_filter.checkMessage('It is a beautiful day outside.')
   # False
 
-  content_filter.checkMessage('Suck my <em>d***</em>!')
-# True
-</code></pre>
+  content_filter.checkMessage('Suck my <em>d***</em>!')<br># True</code></pre>
 #### Example #2
 This is a bit more advanced usage. In this example, a word is being removed from the filter and a new one is being added to the filter. Then, we check to see the results after modifying the filter.
 ```python
