@@ -14,13 +14,15 @@ In the examples listed below, words have been bleeped out with \*'s which the fi
 
 #### Example #1
 This is a basic example of how you could use content filter. In this example, we are just checking a message against the built in filter with no modification to the filter.
-<pre lang=python><code>import content_filter</code>
+```python
+import content_filter
 
-<code>content_filter.checkMessage('It is a beautiful day outside.')</code>
-<code># False</code>
+content_filter.checkMessage('It is a beautiful day outside.')
+# False
 
-<code>content_filter.checkMessage('Suck my <em>d***</em>!')</code>
-<code># True</code></pre>
+content_filter.checkMessage('Suck my <b>d***</b>!')
+# True
+```
 #### Example #2
 This is a bit more advanced usage. In this example, a word is being removed from the filter and a new one is being added to the filter. Then, we check to see the results after modifying the filter.
 ```python
@@ -32,10 +34,10 @@ content_filter.additionalls('today')
 content_filter.checkMessage('Hello there!')
 # False
 
-content_filter.checkMessage('_MOTHERF***ER_!')
+content_filter.checkMessage('MOTHERF***ER!')
 # True
 
-content_filter.checkMessage('Holy _s***_!')
+content_filter.checkMessage('Holy s***!')
 # False
 
 content_filter.checkMessage('Hi, how are you doing _today_?')
