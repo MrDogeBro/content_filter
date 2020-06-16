@@ -40,6 +40,6 @@ content_filter.checkMessage('MOTHERF***ER!')
 content_filter.checkMessage('Holy s***!')
 # False
 
-content_filter.checkMessage('Hi, how are you doing _today_?')
+content_filter.checkMessage('Hi, how are you doing today?')
 # True
 ```
