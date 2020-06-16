@@ -4,7 +4,7 @@ contains any language it shouldn't. It also allows you to add your own words to 
 or define a whole new list of words to filter for.
 
 ## Table of Contents
-1. [Installation] (#installation)
+1. [Installation] (https://github.com/MrDogeBro/content_filter#installation)
 1. [Usage] ()
     * [Filtering Messages] ()
     * [Adding Words to the Filter] ()
