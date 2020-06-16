@@ -9,6 +9,39 @@ To install Content Filter, enter the following command in any sort of terminal w
 $ pip install content-filter
 ```
 
+## Usage
+Listed below are the different functions and their uses. If the function returns any value, that is also listed.
+#### Filtering Messages
+To check a message with Content Filter, use the .checkMessage() function which accepts the message to scan as its argument.
+```python
+import content_filter
+
+content_filter.checkMessage('message')
+# Returns bool of wether it found language from the filter in the message.
+```
+#### Adding Words to the Filter
+To add words to the built in filter, use the .addWords() function which accepts the words to add as its argument. This can either be a single word as a string or multiple words as multiple strings in an array. You can add words in multiple places in your file with the same function.
+```python
+import content_filter
+
+content_filter.addWords('singleword')
+# Adds a single string to the list of words to filter for
+
+content_filter.addWords(['word1', 'word2', 'word3'])
+# Adds a array of strings to the list of words to filter for
+```
+#### Removing Words from the Filter
+To remove words from the built in filter, use the .addExceptions() function which accepts the words to remove as its argument. This can either be a single word as a string or multiple words as multiple strings in an array. You can remove words in multiple places in your file with the same function.
+```python
+import content_filter
+
+content_filter.addExceptions('single word')
+# Adds a single string to the list of words to filter for
+
+content_filter.addExceptions(['word1', 'word2', 'word3'])
+# Adds a array of strings to the list of words to filter for
+```
+
 ## Examples
 In the examples listed below, words have been bleeped out with \*'s which the filter natively checks for but the same concept would appy with the real words.
 
