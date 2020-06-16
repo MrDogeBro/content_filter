@@ -6,15 +6,18 @@ import os
 
 exceptionList = []
 additionalList = []
-useDefaultFile = True
+customWordList = []
+useDefaultList = True
 
 def _makeListsLower(listName):
     if listName == 'exceptionList':
         global exceptionList
         listName = [i.lower() for i in listName]
+
     elif listName == 'additionalList':
         global exceptionList
         listName = [i.lower() for i in listName]
+
     else:
         pass
 
@@ -22,11 +25,30 @@ def _changeListChars(listName):
     if listName == 'exceptionList':
         global exceptionList
         exceptionList = [i.replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#') for i in exceptionList]
+
     elif listName == 'additionalList':
         global additionalList
         additionalList = [i.replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#') for i in additionalList]
+
+    elif listName == 'customList':
+        global customWordList
+        customWordList = [i.replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#').replace(' ', '') for i in customWordList]
+
     else:
         pass
+
+def useCustomList(wordList):
+    global customWordList
+    global useDefaultList
+
+    if isinstance(wordList, list):
+        customWordList = wordList
+    
+    else:
+        customWordList = [wordList]
+
+    useDefaultList = False
+    _changeListChars('customList')
 
 def addExceptions(words=None):
     global exceptionList
@@ -69,42 +91,67 @@ def checkMessage(message):
         did not find anything of interest in the text provided.
     """
 
-    filterContentFile = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data/filter.json')
+    if useDefaultList:
+        filterContentFile = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data/filter.json')
 
-    filterMsgContent = message.lower()
+        filterMsgContent = message.lower()
 
-    # gets all of the words to filter for
-    with open(filterContentFile) as f:
-        filterData = json.load(f)
+        # gets all of the words to filter for
+        with open(filterContentFile) as f:
+            filterData = json.load(f)
 
-    # goes through all of the words in the filter and checks if any are in the message
-    for word in filterData['dontFilter']:
-        # checks for words that should not be filtered in teh message
-        if word in message.lower():
-            filterMsgContent = filterMsgContent.replace(word, '') # gets rid of the words that shouldn't be filtered so that the filter wont find them
+        # goes through all of the words in the filter and checks if any are in the message
+        for word in filterData['dontFilter']:
+            # checks for words that should not be filtered in teh message
+            if word in message.lower():
+                filterMsgContent = filterMsgContent.replace(word, '') # gets rid of the words that shouldn't be filtered so that the filter wont find them
 
-    # goes through all of the words in the filter and checks if any are in the message
-    for word in exceptionList:
-        # checks for words that should not be filtered in teh message
-        if word in message.lower():
-            filterMsgContent = filterMsgContent.replace(word, '') # gets rid of the words that shouldn't be filtered so that the filter wont find them
+        # goes through all of the words in the filter and checks if any are in the message
+        for word in exceptionList:
+            # checks for words that should not be filtered in teh message
+            if word in message.lower():
+                filterMsgContent = filterMsgContent.replace(word, '') # gets rid of the words that shouldn't be filtered so that the filter wont find them
 
-    # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
-    filterMsgContent = filterMsgContent.replace('a$', 'a##').replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#')
+        # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
+        filterMsgContent = filterMsgContent.replace('a$', 'a##').replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#')
 
-    # goes through all of the words in the filter and checks if any are in the message
-    for word in filterData['mainFilter']:
-        if (re.search('+[.!-i]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
-            return True # exits the check so that it doesn't fire multiple 
-            
-    # goes through all of the words in the filter and checks if any are in the message
-    for word in additionalList:
-        if (re.search('+[.!-i]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
-            return True # exits the check so that it doesn't fire multiple times
+        # goes through all of the words in the filter and checks if any are in the message
+        for word in filterData['mainFilter']:
+            if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
+                return True # exits the check so that it doesn't fire multiple 
+                
+        # goes through all of the words in the filter and checks if any are in the message
+        for word in additionalList:
+            if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
+                return True # exits the check so that it doesn't fire multiple times
 
-    # goes through all of the words in the filter and checks if any are in the message
-    for word in filterData['conditionFilter']:
-        if ' ' + word in filterMsgContent or word in filterMsgContent[:len(word)]:
-            return True # exits the check so that it doesn't fire multiple times
+        # goes through all of the words in the filter and checks if any are in the message
+        for word in filterData['conditionFilter']:
+            if ' ' + word in filterMsgContent or word in filterMsgContent[:len(word)]:
+                return True # exits the check so that it doesn't fire multiple times
 
-    return False
+        return False
+
+    else:
+        filterMsgContent = message.lower()
+
+        # goes through all of the words in the filter and checks if any are in the message
+        for word in exceptionList:
+            # checks for words that should not be filtered in teh message
+            if word in message.lower():
+                filterMsgContent = filterMsgContent.replace(word, '') # gets rid of the words that shouldn't be filtered so that the filter wont find them
+
+        # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
+        filterMsgContent = filterMsgContent.replace('a$', 'a##').replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#')
+
+        # goes through all of the words in the filter and checks if any are in the message
+        for word in customWordList:
+            if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
+                return True # exits the check so that it doesn't fire multiple 
+                
+        # goes through all of the words in the filter and checks if any are in the message
+        for word in additionalList:
+            if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
+                return True # exits the check so that it doesn't fire multiple times
+
+        return False

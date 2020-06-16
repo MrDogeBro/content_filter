@@ -18,4 +18,4 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2020-2020 MrDogeBro'
 __version__ = '1.0.0'
 
-from .filter import checkMessage, exceptions, additionalls
+from .filter import checkMessage, addExceptions, addWords, useCustomList
