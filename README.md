@@ -5,4 +5,6 @@ or define a whole new list of words to filter for.
 
 ## Installation
 To install Content Filter, enter the following command in a terminal window.
-```$ pip install content-filter```
+```
+$ pip install content-filter
+```
