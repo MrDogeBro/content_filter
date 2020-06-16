@@ -6,11 +6,11 @@ or define a whole new list of words to filter for.
 ## Table of Contents
 1. [Installation](#installation)
 1. [Usage](#usage)
-    * [Filtering Messages]()
-    * [Adding Words to the Filter]()
-    * [Removing Words from the Filter]()
-    * [Using a Custom Filter]()
-1. [Examples]()
+    * [Filtering Messages](#filter-messages)
+    * [Adding Words to the Filter](#adding-words-to-the-filter)
+    * [Removing Words from the Filter](#removing-words-from-the-filter)
+    * [Using a Custom Filter](#using-a-custom-filter)
+1. [Examples](#examples)
 
 
 ## Installation
