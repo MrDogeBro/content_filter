@@ -3,6 +3,15 @@ A basic but robust content filter for python. Content Filter allows you to easil
 contains any language it shouldn't. It also allows you to add your own words to filter for, remove words to filter for, 
 or define a whole new list of words to filter for.
 
+## Table of Contents
+1. Installation
+1. Usage
+    1. Filtering Messages
+    1. Adding Words to the Filter
+    1. Removing Words from the Filter
+    1. Using a Custom Filter
+1. Examples
+
 ## Installation
 To install Content Filter, enter the following command in any sort of terminal window as long as you have Python 3 installed on your computer.
 ```
