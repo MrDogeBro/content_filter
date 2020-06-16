@@ -14,15 +14,15 @@ In the examples listed below, words have been bleeped out with \*'s which the fi
 
 #### Example #1
 This is a basic example of how you could use content filter. In this example, we are just checking a message against the built in filter with no modification to the filter.
-<pre lang='python'><code>
-import content_filter
+<pre><code>
+  import content_filter
 
-content_filter.checkMessage('It is a beautiful day outside.')
-# False
+  content_filter.checkMessage('It is a beautiful day outside.')
+  # False
 
-content_filter.checkMessage('Suck my <em>d***<em>!')
-# True
-  </code></pre>
+  content_filter.checkMessage('Suck my <em>d***</em>!')
+  # True
+</code></pre>
 #### Example #2
 This is a bit more advanced usage. In this example, a word is being removed from the filter and a new one is being added to the filter. Then, we check to see the results after modifying the filter.
 ```python
