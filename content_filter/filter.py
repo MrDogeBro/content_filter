@@ -28,7 +28,7 @@ def _changeListChars(listName):
     else:
         pass
 
-def exceptions(words=None):
+def addExceptions(words=None):
     global exceptionList
 
     if isinstance(words, list):
@@ -39,7 +39,7 @@ def exceptions(words=None):
 
     _makeListsLower('exceptionList')
 
-def additionalls(words=None):
+def addWords(words=None):
     global additionalList
 
     if isinstance(words, list):
