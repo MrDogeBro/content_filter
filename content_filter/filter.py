@@ -80,12 +80,12 @@ def checkMessage(message):
 
     # goes through all of the words in the filter and checks if any are in the message
     for word in filterData['mainFilter']:
-        if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent)):
+        if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
             return True # exits the check so that it doesn't fire multiple 
             
     # goes through all of the words in the filter and checks if any are in the message
     for word in additionalList:
-        if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent)):
+        if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
             return True # exits the check so that it doesn't fire multiple times
 
     # goes through all of the words in the filter and checks if any are in the message
