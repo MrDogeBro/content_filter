@@ -12,7 +12,7 @@ $ pip install content-filter
 ## Examples
 In the examples listed below, words have been bleeped out with \*'s which the filter natively checks for but the same concept would appy with the real words.
 
-### Example #1
+#### Example #1
 ```python
 import content_filter
 
