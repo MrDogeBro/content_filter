@@ -12,6 +12,8 @@ or define a whole new list of words to filter for.
     * [Using a Custom Filter] ()
 1. [Examples] ()
 
+[Installation] (https://github.com/MrDogeBro/content_filter#installation)
+
 ## Installation
 To install Content Filter, enter the following command in any sort of terminal window as long as you have Python 3 installed on your computer.
 ```
