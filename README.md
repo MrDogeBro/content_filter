@@ -6,10 +6,10 @@ or define a whole new list of words to filter for.
 ## Table of Contents
 1. Installation
 1. Usage
-    1. Filtering Messages
-    1. Adding Words to the Filter
-    1. Removing Words from the Filter
-    1. Using a Custom Filter
+    2. Filtering Messages
+    2. Adding Words to the Filter
+    2. Removing Words from the Filter
+    2. Using a Custom Filter
 1. Examples
 
 ## Installation
