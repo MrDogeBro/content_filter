@@ -12,7 +12,7 @@ $ pip install content-filter
 ## Usage
 Listed below are the different functions and their uses. If the function returns any value, that is also listed.
 #### Filtering Messages
-To check a message with Content Filter, use the .checkMessage() function which accepts the message to scan as its argument.
+To check a message with Content Filter, use the .checkMessage() function which accepts the message as a string to scan as its argument.
 ```python
 import content_filter
 
