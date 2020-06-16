@@ -20,7 +20,7 @@ import content_filter
 content_filter.checkMessage('It is a beautiful day outside.')
 # False
 
-content_filter.checkMessage('Suck my <b>d***</b>!')
+content_filter.checkMessage('Suck my d***!')
 # True
 ```
 #### Example #2
