@@ -9,8 +9,10 @@ To install Content Filter, enter the following command in a terminal window.
 $ pip install content-filter
 ```
 
-## Usage
+## Examples
+In the examples listed below, words have been bleeped out with \*'s which the filter natively checks for but the same concept would appy with the real words.
 
+### Example #1
 ```python
 import content_filter
 
