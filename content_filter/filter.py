@@ -8,12 +8,25 @@ exceptionList = []
 additionalList = []
 useDefaultFile = True
 
-def _makeListsLower():
-    global exceptionList
-    global additionalList
+def _makeListsLower(listName):
+    if listName == 'exceptionList':
+        global exceptionList
+        listName = [i.lower() for i in listName]
+    elif listName == 'additionalList':
+        global exceptionList
+        listName = [i.lower() for i in listName]
+    else:
+        pass
 
-    exceptionList = [i.lower() for i in exceptionList]
-    additionalList = [i.lower() for i in additionalList]
+def _changeListChars(listName):
+    if listName == 'exceptionList':
+        global exceptionList
+        exceptionList = [i.replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#') for i in exceptionList]
+    elif listName == 'additionalList':
+        global additionalList
+        additionalList = [i.replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#') for i in additionalList]
+    else:
+        pass
 
 def exceptions(words=None):
     global exceptionList
@@ -24,7 +37,7 @@ def exceptions(words=None):
     else:
         exceptionList.extend([words])
 
-    _makeListsLower()
+    _makeListsLower('exceptionList')
 
 def additionalls(words=None):
     global additionalList
@@ -35,7 +48,8 @@ def additionalls(words=None):
     else:
         additionalList.extend([words])
 
-    _makeListsLower()
+    _makeListsLower('additionalList')
+    _changeListChars('additionalList')
 
 def checkMessage(message):
     """Checks the provided message for any words that should be filtered and
@@ -80,12 +94,12 @@ def checkMessage(message):
 
     # goes through all of the words in the filter and checks if any are in the message
     for word in filterData['mainFilter']:
-        if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
+        if (re.search('+[.!-i]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
             return True # exits the check so that it doesn't fire multiple 
             
     # goes through all of the words in the filter and checks if any are in the message
     for word in additionalList:
-        if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
+        if (re.search('+[.!-i]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
             return True # exits the check so that it doesn't fire multiple times
 
     # goes through all of the words in the filter and checks if any are in the message
