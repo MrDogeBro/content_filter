@@ -10,15 +10,22 @@ $ pip install content-filter
 ```
 
 ## Usage
+
 ```python
 import content_filter
+
+content_filter.exceptions('s***')
+content_filter.additionalls('today')
 
 content_filter.checkMessage('Hello there!')
 # False
 
-content_filter.checkMessage('MOTHERF***ER!')
+content_filter.checkMessage('_MOTHERF***ER_!')
 # True
 
-content_filter.checkMessage('Hi, how are you doing today?')
+content_filter.checkMessage('Holy _s***_!')
 # False
+
+content_filter.checkMessage('Hi, how are you doing _today_?')
+# True
 ```
