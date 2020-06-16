@@ -15,4 +15,10 @@ import content_filter
 
 content_filter.checkMessage('Hello there!')
 # False
+
+content_filter.checkMessage('MOTHERF***ER!')
+# True
+
+content_filter.checkMessage('Hi, how are you doing today?')
+# False
 ```
