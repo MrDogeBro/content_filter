@@ -16,10 +16,10 @@ In the examples listed below, words have been bleeped out with \*'s which the fi
 This is a basic example of how you could use content filter. In this example, we are just checking a message against the built in filter with no modification to the filter.
 <pre lang=python><code>import content_filter
 
-content_filter.checkMessage('It is a beautiful day outside.')
-# False
+  content_filter.checkMessage('It is a beautiful day outside.')
+  # False
 
-content_filter.checkMessage('Suck my <em>d***</em>!')
+  content_filter.checkMessage('Suck my <em>d***</em>!')
 # True
 </code></pre>
 #### Example #2
