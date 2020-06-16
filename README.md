@@ -99,4 +99,4 @@ content_filter.checkMessage('Hi, how are you doing today?')
 ```
 
 ## License
-The Content Filter module for Python is licensed under an [MIT license](/blob/master/LICENSE).
+The Content Filter module for Python is licensed under an [MIT license](/LICENSE).
