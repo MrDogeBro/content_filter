@@ -4,13 +4,13 @@ contains any language it shouldn't. It also allows you to add your own words to 
 or define a whole new list of words to filter for.
 
 ## Table of Contents
-1. Installation
-1. Usage
-    - Filtering Messages
-    - Adding Words to the Filter
-    - Removing Words from the Filter
-    - Using a Custom Filter
-1. Examples
+1. [Installation] (#installation)
+1. [Usage] ()
+    * [Filtering Messages] ()
+    * [Adding Words to the Filter] ()
+    * [Removing Words from the Filter] ()
+    * [Using a Custom Filter] ()
+1. [Examples] ()
 
 ## Installation
 To install Content Filter, enter the following command in any sort of terminal window as long as you have Python 3 installed on your computer.
