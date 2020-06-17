@@ -10,7 +10,8 @@ install:
   - pip install -r requirements.txt
 # command to run tests
 script:
-  - nosetest tests.filtertest
+  - nosetests tests.filtertest
+  - nosetests tests.custom_filter_test.py
 
 notifications:
   email:
