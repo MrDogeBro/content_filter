@@ -1,4 +1,5 @@
-# Python Content Filter [![Build Status](https://travis-ci.com/MrDogeBro/content_filter.svg?token=K4YBJnRBuxqyhssWYMJt&branch=master)](https://travis-ci.com/MrDogeBro/content_filter.svg?token=K4YBJnRBuxqyhssWYMJt&branch=master)
+# Python Content Filter
+[![Build Status](https://travis-ci.com/MrDogeBro/content_filter.svg?token=K4YBJnRBuxqyhssWYMJt&branch=master)](https://travis-ci.com/github/MrDogeBro/content_filter) [![HitCount](http://hits.dwyl.com/MrDogeBro/content_filter.svg)](http://hits.dwyl.com/MrDogeBro/content_filter)
 A basic but robust content filter for python. Content Filter allows you to easily detect if a piece of text 
 contains any language it shouldn't. It also allows you to add your own words to filter for, remove words to filter for, 
 or define a whole new list of words to filter for.
