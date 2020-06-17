@@ -11,7 +11,7 @@ install:
 # command to run tests
 script:
   - nosetests tests.filter_test
-  - nosetests tests.custom_filter_test.py
+  - nosetests tests.custom_filter_test
 
 notifications:
   email:
