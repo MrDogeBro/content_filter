@@ -7,8 +7,8 @@
         "anus",
         "ar5e",
         "arrse",
+        "asshole",
         "arse",
-        "azz",
         "bi7ch",
         "babeland",
         "ballsack",
@@ -20,7 +20,7 @@
         "biatch",
         "bigtits",
         "bitch",
-        "blow job",
+        "blowjob",
         "boned",
         "boner",
         "boob",
@@ -76,7 +76,7 @@
         "nipple",
         "nude",
         "nudity",
-        "nut sack",
+        "nutsack",
         "orally",
         "paedophile",
         "pantie",
@@ -127,9 +127,9 @@
         "vigina",
         "virgin",
         "vjay",
-        "wee",
+        "weewee",
         "weiner",
-        "wet dream",
+        "wetdream",
         "wh0re",
         "whoar",
         "whor",
@@ -143,15 +143,33 @@
         "fu##",
         "as#",
         "a#s",
-        "a##"
+        "a##",
+        "d###",
+        "d#ck",
+        "di#k",
+        "di##",
+        "d##k",
+        "d#c#",
+        "hell",
+        "heii",
+        "h3ii",
+        "h3ll",
+        "h3li",
+        "heil",
+        "h3il"
     ],
     "dontFilter": [
-        "virginia"
+        "virginia",
+        "excited"
     ],
     "conditionFilter": [
         "ass",
         "as s",
         "a ss",
-        "a s s"
+        "a s s",
+        "azz",
+        "az z",
+        "z zz",
+        "a z z"
     ]
 }

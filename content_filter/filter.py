@@ -90,7 +90,6 @@ def checkMessage(message):
         something in the text provided. False is returned if the filter
         did not find anything of interest in the text provided.
     """
-
     if useDefaultList:
         filterContentFile = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data/filter.json')
 
@@ -109,7 +108,19 @@ def checkMessage(message):
         # goes through all of the words in the filter and checks if any are in the message
         for word in exceptionList:
             # checks for words that should not be filtered in teh message
-            if word in message.lower():
+            for string in filterData['mainFilter']:
+                if string in exceptionList:
+                    try:
+                        filterData['mainFilter'].pop(filterData['mainFilter'].index(string))
+
+                    except:
+                        filterMsgContent = filterMsgContent.replace(word, '') # gets rid of the words that shouldn't be filtered so that the filter wont find them
+
+            # checks for words that should not be filtered in teh message
+            try:
+                filterData['conditionalFilter'].pop(word)
+
+            except:
                 filterMsgContent = filterMsgContent.replace(word, '') # gets rid of the words that shouldn't be filtered so that the filter wont find them
 
         # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
@@ -117,12 +128,12 @@ def checkMessage(message):
 
         # goes through all of the words in the filter and checks if any are in the message
         for word in filterData['mainFilter']:
-            if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
+            if (re.search('+[.!-]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
                 return True # exits the check so that it doesn't fire multiple 
                 
         # goes through all of the words in the filter and checks if any are in the message
         for word in additionalList:
-            if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
+            if (re.search('+[.!-]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
                 return True # exits the check so that it doesn't fire multiple times
 
         # goes through all of the words in the filter and checks if any are in the message
@@ -138,7 +149,10 @@ def checkMessage(message):
         # goes through all of the words in the filter and checks if any are in the message
         for word in exceptionList:
             # checks for words that should not be filtered in teh message
-            if word in message.lower():
+            try:
+                customWordList.pop(word)
+
+            except:
                 filterMsgContent = filterMsgContent.replace(word, '') # gets rid of the words that shouldn't be filtered so that the filter wont find them
 
         # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
@@ -146,12 +160,12 @@ def checkMessage(message):
 
         # goes through all of the words in the filter and checks if any are in the message
         for word in customWordList:
-            if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
+            if (re.search('+[.!-]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
                 return True # exits the check so that it doesn't fire multiple 
                 
         # goes through all of the words in the filter and checks if any are in the message
         for word in additionalList:
-            if (re.search('+[.!-i ]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
+            if (re.search('+[.!-]*'.join(c for c in word), filterMsgContent.replace(' ', ''))):
                 return True # exits the check so that it doesn't fire multiple times
 
         return False
