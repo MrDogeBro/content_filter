@@ -6,29 +6,34 @@ contains any language it shouldn't. It also allows you to add your own words to 
 or define a whole new list of words to filter for.
 
 ## Table of Contents
-1. [Installation](#installation)
+1. [Getting Started](#getting-started)
+    * [Python Version](#python-version)
+    * [Installation](#installation)
 1. [Usage](#usage)
     * [Filtering Messages](#filter-messages)
     * [Adding Words to the Filter](#adding-words-to-the-filter)
     * [Removing Words from the Filter](#removing-words-from-the-filter)
     * [Using a Custom Filter](#using-a-custom-filter)
 1. [Examples](#examples)
+    * [Example #1](#example-1)
+    * [Example #2](#example-2)
+    * [Example #3](#example-3)
 1. [License](#license)
 
 ## Getting Started
 To get started, just make sure you have pip installed. If you use python, you probably already have pip installed as a lot of modules and libraries distribute via pip.
 
 ### Python Version
-Make sure that you have python 3.4 or above installed or else the module will not work.
+Please make sure that you have Python 3.4 or above installed or else the module will not work.
 
 ### Installation
-To install Content Filter, enter the following command in any sort of terminal window as long as you have Python 3 installed on your computer.
+To install Content Filter, enter the following command in any sort of terminal window or command prompt.
 ```
 $ pip install content-filter
 ```
 
 ## Usage
-Listed below are the different functions and their uses. If the function returns any value, that is also listed.
+Listed below are the different functions and their uses. If the function returns any value, the value it returns is also listed.
 
 ### Filtering Messages
 To check a message with Content Filter, use the `.checkMessage()` function which accepts the message as a string to scan as its argument.
@@ -64,7 +69,7 @@ content_filter.addExceptions(['word1', 'word2', 'word3'])
 ```
 
 ### Using a Custom Filter
-To use a completely custom filter, use the `.useCustomList()` function which accepts the list of words you would like to use as its argument. This can either be a single word as a string or multiple words as an array of strings. You can only define this in one place in your file. You can use the `.addWords()` and `.addExceptions()` functions to add or remove words from your custom filter anywhere in the file still.
+To use a completely custom filter, use the `.useCustomList()` function which accepts the list of words you would like to use as its argument. This can either be a single word as a string or multiple words as an array of strings. You can only define this in one place in your file (we recommend doing it somewhere near the top). You can use the `.addWords()` and `.addExceptions()` functions to add or remove words from your custom filter anywhere in the file still.
 ```python
 import content_filter
 
@@ -76,9 +81,9 @@ content_filter.useCustomList(['word1', 'word2', 'word3'])
 ```
 
 ## Examples
-In the examples listed below, words have been bleeped out with \*'s which the filter natively checks for but the same concept would appy with the real words.
+In the examples listed below, words have been bleeped out with \*'s which the filter natively checks for but the same concept would apply with the real words.
 
-#### Example #1
+### Example #1
 This is a basic example of how you could use content filter. In this example, we are just checking a message against the built in filter with no modification to the filter.
 ```python
 import content_filter
@@ -89,7 +94,8 @@ content_filter.checkMessage('It is a beautiful day outside.')
 content_filter.checkMessage('Suck my d***!')
 # True
 ```
-#### Example #2
+
+### Example #2
 This is a bit more advanced usage. In this example, a word is being removed from the filter and a new one is being added to the filter. Then, we check to see the results after modifying the filter.
 ```python
 import content_filter
@@ -110,7 +116,25 @@ content_filter.checkMessage('Hi, how are you doing today?')
 # True
 ```
 
-## Contributions
+### Example #3
+This is probably the most advanced use case for the module. In this example, the user is defining a custom list of words to check for which overrides the default filter. It will search for the words the same way but it will only search for the words that user defines in the custom filter.
+```python
+import content_filter
+
+content_filter.useCustomFilter(['word1', 'word2'])
+
+content_filter.checkMessage('Hello there!')
+# False
+
+content_filter.checkMessage('Welcome word1!')
+# True
+
+content_filter.checkMessage('What the f***!')
+# False
+
+content_filter.checkMessage('Hi, contains word2!')
+# True
+```
 
 ## License
 The Content Filter module for Python is licensed under an [MIT license](https://github.com/MrDogeBro/content_filter/blob/master/LICENSE).
