@@ -1,5 +1,5 @@
 # Python Content Filter
-[![Build Status](https://travis-ci.com/MrDogeBro/content_filter.svg?token=K4YBJnRBuxqyhssWYMJt&branch=master)](https://travis-ci.com/github/MrDogeBro/content_filter) [![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![Build Status](https://travis-ci.com/MrDogeBro/content_filter.svg?token=K4YBJnRBuxqyhssWYMJt&branch=master)](https://travis-ci.com/github/MrDogeBro/content_filter) [![PyPI pyversions](https://img.shields.io/pypi/pyversions/content-filter.svg)](https://pypi.python.org/pypi/content_filter/) [![](https://img.shields.io/github/license/MrDogeBro/content_filter.svg)](https://github.com/MrDogeBro/content_filter/blob/master/LICENSE) [![PyPI status](https://img.shields.io/pypi/status/content_filter.svg)](https://pypi.python.org/pypi/content_filter/)
 
 A basic but robust content filter for python. Content Filter allows you to easily detect if a piece of text 
 contains any language it shouldn't. It also allows you to add your own words to filter for, remove words to filter for, 
@@ -101,4 +101,4 @@ content_filter.checkMessage('Hi, how are you doing today?')
 ```
 
 ## License
-The Content Filter module for Python is licensed under an [MIT license](/LICENSE).
+The Content Filter module for Python is licensed under an [MIT license](https://github.com/MrDogeBro/content_filter/blob/master/LICENSE).
