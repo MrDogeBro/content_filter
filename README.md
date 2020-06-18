@@ -19,6 +19,7 @@ or define a whole new list of words to filter for.
     * [Example #2](#example-2)
     * [Example #3](#example-3)
 1. [Contributing](#contributing)
+1. [Disclaimer](#disclaimer)
 1. [License](#license)
 
 ## Getting Started
