@@ -15,6 +15,7 @@ setuptools.setup(
     download_url = 'https://github.com/MrDogeBro/content_filter/archive/v1.0.0.tar.gz',
     packages=setuptools.find_packages(),
     classifiers=[
+        'Development Status :: 5 - Production/Stable',
         "Natural Language :: English",
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
