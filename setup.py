@@ -5,15 +5,16 @@ with open('pypi/README.md', 'r') as fh:
 
 setuptools.setup(
     name='content-filter',
-    version='1.0.1',
+    version='1.0.2',
     author='MrDogeBro',
     author_email='bornoffire54@gmail.com',
     description='A basic but robust content filter for python.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/MrDogeBro/content_filter',
-    download_url = 'https://github.com/MrDogeBro/content_filter/archive/v1.0.1.tar.gz',
+    download_url = 'https://github.com/MrDogeBro/content_filter/archive/v1.0.2.tar.gz',
     packages=setuptools.find_packages(),
+    package_data = {'content_filter': ['data/filter.json']},
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Natural Language :: English',
