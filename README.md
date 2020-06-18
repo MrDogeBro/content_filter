@@ -140,5 +140,8 @@ content_filter.checkMessage('Hi, contains word2!')
 ## Contributing
 If you would like to help improve the Content Filter module, there are a few things that you can do to help. First, if you find any bugs/issues within the module, please report them in the [issues tab](https://github.com/MrDogeBro/content_filter/issues). Second, if you have any features that you would like added to the module or you have any other suggestions for the module, please submit a [pull request](https://github.com/MrDogeBro/content_filter/pulls). Third, if you found that a word was able to bypass the filter in your application, please submit a [bypass report](https://forms.gle/jaQkoPi54wayu9FA7). Finally, if you would like to help improve the filtering system, test the module on a ton of sentences and submit a [testing report](https://forms.gle/eXyUwdnqj9D8DgzB6) if you find any words that should be added or removed from the default filter. Testing is probably the most useful contribution you can make right now. We thank you for any contributions that you make to the module.
 
+## Disclaimer
+Please be aware that the code on GitHub may be newer than the version that is on [PyPI](https://pypi.org/project/content-filter/) since code my be uploaded to github as a beta before it is uploaded officially to PyPI.
+
 ## License
 The Content Filter module for Python is licensed under an [MIT license](https://github.com/MrDogeBro/content_filter/blob/master/LICENSE).
