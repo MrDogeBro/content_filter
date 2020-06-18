@@ -38,6 +38,19 @@ def _changeListChars(listName):
         pass
 
 def useCustomList(wordList):
+    """Allows the user to define a custom list of words to filter for.
+    Keep in mind that this will completely override the default filter,
+    meaning that any words defined in the default filter will now have
+    to be manually added by the user if they desire for those words to
+    be filtered. If you would just like to add on or remove from the 
+    existing, please check out our [GitHub](https://github.com/MrDogeBro/content_filter)
+
+    Paramaters:
+    ----------
+    words:
+        The words that the filter will check for. This can be in the 
+        form of a single string or an array of strings.
+    """
     global customWordList
     global useDefaultList
 
@@ -51,6 +64,17 @@ def useCustomList(wordList):
     _changeListChars('customList')
 
 def addExceptions(words=None):
+    """Allows the user to remove words to the list of pre-defined words
+    to filter for. If you would like to completely override the existing
+    filter, please check out our [GitHub](https://github.com/MrDogeBro/content_filter)
+
+    Paramaters:
+    ----------
+    words:
+        The words that will be removed from the default filter to 
+        check for. This can be in the form of a single string or an
+        array of strings.
+    """
     global exceptionList
 
     if isinstance(words, list):
@@ -62,6 +86,17 @@ def addExceptions(words=None):
     _makeListsLower('exceptionList')
 
 def addWords(words=None):
+    """Allows the user to add words to the list of pre-defined words
+    to filter for. If you would like to completely override the existing
+    filter, please check out our [GitHub](https://github.com/MrDogeBro/content_filter)
+
+    Paramaters:
+    ----------
+    words:
+        The words that will be added to the default filter to check 
+        for. This can be in the form of a single string or an array 
+        of strings.
+    """
     global additionalList
 
     if isinstance(words, list):
