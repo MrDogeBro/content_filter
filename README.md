@@ -15,7 +15,13 @@ or define a whole new list of words to filter for.
 1. [Examples](#examples)
 1. [License](#license)
 
-## Installation
+## Getting Started
+To get started, just make sure you have pip installed. If you use python, you probably already have pip installed as a lot of modules and libraries distribute via pip.
+
+### Python Version
+Make sure that you have python 3.4 or above installed or else the module will not work.
+
+### Installation
 To install Content Filter, enter the following command in any sort of terminal window as long as you have Python 3 installed on your computer.
 ```
 $ pip install content-filter
@@ -23,7 +29,8 @@ $ pip install content-filter
 
 ## Usage
 Listed below are the different functions and their uses. If the function returns any value, that is also listed.
-#### Filtering Messages
+
+### Filtering Messages
 To check a message with Content Filter, use the `.checkMessage()` function which accepts the message as a string to scan as its argument.
 ```python
 import content_filter
@@ -31,7 +38,8 @@ import content_filter
 content_filter.checkMessage('message')
 # Returns bool of wether it found language from the filter in the message.
 ```
-#### Adding Words to the Filter
+
+### Adding Words to the Filter
 To add words to the built in filter, use the `.addWords()` function which accepts the words to add as its argument. This can either be a single word as a string or multiple words as an array of strings. You can add words in multiple places in your file with the same function.
 ```python
 import content_filter
@@ -42,7 +50,8 @@ content_filter.addWords('singleword')
 content_filter.addWords(['word1', 'word2', 'word3'])
 # Adds an array of strings to the list of words to filter for
 ```
-#### Removing Words from the Filter
+
+### Removing Words from the Filter
 To remove words from the built in filter, use the `.addExceptions()` function which accepts the words to remove as its argument. This can either be a single word as a string or multiple words as an array of strings. You can remove words in multiple places in your file with the same function.
 ```python
 import content_filter
@@ -53,7 +62,8 @@ content_filter.addExceptions('singleword')
 content_filter.addExceptions(['word1', 'word2', 'word3'])
 # Adds an array of strings to the list of words to filter for
 ```
-#### Using a Custom Filter
+
+### Using a Custom Filter
 To use a completely custom filter, use the `.useCustomList()` function which accepts the list of words you would like to use as its argument. This can either be a single word as a string or multiple words as an array of strings. You can only define this in one place in your file. You can use the `.addWords()` and `.addExceptions()` functions to add or remove words from your custom filter anywhere in the file still.
 ```python
 import content_filter
@@ -99,6 +109,8 @@ content_filter.checkMessage('Holy s***!')
 content_filter.checkMessage('Hi, how are you doing today?')
 # True
 ```
+
+## Contributions
 
 ## License
 The Content Filter module for Python is licensed under an [MIT license](https://github.com/MrDogeBro/content_filter/blob/master/LICENSE).
