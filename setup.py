@@ -5,7 +5,7 @@ with open('pypi/README.md', 'r') as fh:
 
 setuptools.setup(
     name='content-filter',
-    version='1.0.3',
+    version='1.0.4',
     author='MrDogeBro',
     author_email='bornoffire54@gmail.com',
     description='A basic but robust content filter for python.',
