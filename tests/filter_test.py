@@ -105,6 +105,7 @@ class TestFilter(unittest.TestCase):
         self.assertEqual(content_filter.checkMessage("You bite up because of your lower jaw."), False)
         self.assertEqual(content_filter.checkMessage("The mysterious diary records the voice."), False)
         self.assertEqual(content_filter.checkMessage("Hello there, how are you doing today?"), False)
+        self.assertEqual(content_filter.checkMessage("scunthorpe"), False)
 
     def filter_additions_test(self):
         self.assertEqual(content_filter.checkMessage("Lets go the the raveEEEEEE!!!!"), False)
