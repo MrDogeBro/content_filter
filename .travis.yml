@@ -12,6 +12,7 @@ install:
 script:
   - nosetests tests.filter_test
   - nosetests tests.custom_filter_test
+  - nosetests tests.custom_file_test
 
 notifications:
   email:

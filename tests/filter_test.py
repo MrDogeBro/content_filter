@@ -107,6 +107,18 @@ class TestFilter(unittest.TestCase):
         self.assertEqual(content_filter.checkMessage("Hello there, how are you doing today?"), False)
         self.assertEqual(content_filter.checkMessage("scunthorpe"), False)
 
+    def filter_list_test(self):
+        self.assertEqual(content_filter.checkMessageList("You always look best when your nude!"), [{'word': 'nude', 'censored': 'nud3', 'count': 1}])
+        self.assertEqual(content_filter.checkMessageList("I met an interesting turtle while the song on the radio blasted away."), False)
+        self.assertEqual(content_filter.checkMessageList("Hello there, how are you doing today?"), False)
+        self.assertEqual(content_filter.checkMessageList("you wh0@r!"), [{'word': 'hoar', 'censored': 'h0@r', 'count': 1}, {'word': 'whore', 'censored': 'wh0r3', 'count': 1}])
+        self.assertEqual(content_filter.checkMessageList("The skeleton had skeletons of his own in the closet."), False)
+        self.assertEqual(content_filter.checkMessageList("You would be a great p0rn star girl!"), [{'word': 'porn', 'censored': 'p0rn', 'count': 1}])
+        self.assertEqual(content_filter.checkMessageList("They throw cabbage that turns your brain into emotional baggage."), False)
+        self.assertEqual(content_filter.checkMessageList("He had concluded that pigs must be able to fly in Hog Heaven."), False)
+        self.assertEqual(content_filter.checkMessageList("Don't be scared to drop dem panties girl"), [{'word': 'pantie', 'censored': 'p@nt!e', 'count': 1}])
+        self.assertEqual(content_filter.checkMessageList("Im good, hbu?"), False)
+
     def filter_additions_test(self):
         self.assertEqual(content_filter.checkMessage("Lets go the the raveEEEEEE!!!!"), False)
         self.assertEqual(content_filter.checkMessage("AREA 51 STATUS!!!!!!!"), False)

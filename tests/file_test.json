@@ -1,0 +1,10 @@
+{
+    "mainFilter": [
+        {"find": "testing", "word": "testing", "censored": "t3$t!ng"},
+        {"find": "check", "word": "check", "censored": "ch3ck"},
+        {"find": "wtf", "word": "wtf", "censored": "w+f"},
+        {"find": "howu", "word": "how u", "censored": "h0w u"}
+    ],
+    "dontFilter": null,
+    "conditionFilter": []
+}
