@@ -47,7 +47,7 @@ Listed below are the different functions and their uses. If the function returns
 
 ### Filtering Messages
 
-To check a message with Content Filter, you have 2 options. You can either use the `.checkMessage()` or `.checkMessageList()` function which accepts the message as a string to scan as its argument.
+To check a message with Content Filter, you have 2 options. You can either use the `checkMessage()` or `checkMessageList()` function which accepts the message as a string to scan as its argument.
 
 ```python
 import content_filter
@@ -61,7 +61,7 @@ content_filter.checkMessageList('message')
 
 ### Adding Words to the Filter
 
-To add words to the built in filter, use the `.addWords()` function which accepts the words to add as its argument. This can either be a single word as a string or multiple words as an list of strings. You can add words in multiple places in your file with the same function.
+To add words to the built in filter, use the `addWords()` function which accepts the words to add as its argument. This can either be a single word as a string or multiple words as an list of strings. You can add words in multiple places in your file with the same function.
 
 ```python
 import content_filter
@@ -75,7 +75,7 @@ content_filter.addWords(['word1', 'word2', 'word3'])
 
 ### Removing Words from the Filter
 
-To remove words from the built in filter, use the `.addExceptions()` function which accepts the words to remove as its argument. This can either be a single word as a string or multiple words as an list of strings. You can remove words in multiple places in your file with the same function.
+To remove words from the built in filter, use the `addExceptions()` function which accepts the words to remove as its argument. This can either be a single word as a string or multiple words as an list of strings. You can remove words in multiple places in your file with the same function.
 
 ```python
 import content_filter
@@ -89,7 +89,7 @@ content_filter.addExceptions(['word1', 'word2', 'word3'])
 
 ### Using a Custom Filter
 
-To use a completely custom filter, you have to options. Your first option, use the `.useCustomList()` function which accepts the list of words you would like to use as its argument. This can either be a single word as a string or multiple words as an list of strings. You can only define this in one place in your file (we recommend doing it somewhere near the top). You can use the `.addWords()` and `.addExceptions()` functions to add or remove words from your custom filter anywhere in the file still. Your second option is to create a JSON file to store the words in. To do this, use `.useCustomListFile()` and then pass in a relative file path as a string and the `__file__` object so that the file can be located. It is important that you follow the specific structure for the JSON file that is listed below.
+To use a completely custom filter, you have to options. Your first option, use the `useCustomList()` function which accepts the list of words you would like to use as its argument. This can either be a single word as a string or multiple words as an list of strings. You can only define this in one place in your file (we recommend doing it somewhere near the top). You can use the `addWords()` and `addExceptions()` functions to add or remove words from your custom filter anywhere in the file still. Your second option is to create a JSON file to store the words in. To do this, use `useCustomListFile()` and then pass in a relative file path as a string and the `__file__` object so that the file can be located. It is important that you follow the specific structure for the JSON file that is listed below.
 
 ###### Option 1
 
@@ -134,6 +134,8 @@ If you ever want to make any of the filters blank, just put a empty list in the 
   ]
 }
 ```
+
+Also, if you ever want to update the JSON file while python is running and have it start filtering for the words added, just call the `updateListFromFile()` function and it will re-pull the JSON file that was specified to be used.
 
 ## Examples
 
