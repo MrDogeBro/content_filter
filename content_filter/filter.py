@@ -10,6 +10,7 @@ additionalList = []
 customWordList = []
 useDefaultList = True
 useCustomFile = False
+customJSONFile = None
 
 
 def _makeListsLower(listName):
@@ -133,9 +134,12 @@ def useCustomListFile(file, currentFile):
     file:
         A json file that defines a list of words to filter for. To find
         out the json file structure, check out our Github (linked above)
+    currentFile:
+        The current file that is calling the function. You pass this in
+        by passing in __file__
     """
 
-    global useCustomFile, useDefaultList
+    global useCustomFile, useDefaultList, customJSONFile
 
     customJSONFile = os.path.join(os.path.dirname(
         os.path.abspath(currentFile)), file)
@@ -144,6 +148,22 @@ def useCustomListFile(file, currentFile):
         useCustomFile = json.load(f)
 
     useDefaultList = False
+
+
+def updateListFromFile():
+    """Allows the user to update the filter list when using a custom
+    JSON file so that if anything in the JSON file changed the changes
+    are applied to the filter.
+    """
+
+    global useCustomFile
+
+    if useCustomFile:
+        with open(customJSONFile) as f:
+            useCustomFile = json.load(f)
+
+    else:
+        raise RuntimeError('A Custom JSON file to use was never provided')
 
 
 def checkMessage(message):
@@ -184,7 +204,7 @@ def checkMessageList(message):
 
     Returns:
     -------
-        Returns a `list` value. List with words found, count of the words
+        Returns a list value. List with words found, count of the words
         found, and a censored version of the words is returned if the filter
         found something in the text provided. False is returned if the filter
         did not find anything of interest in the text provided.
