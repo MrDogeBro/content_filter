@@ -56,7 +56,7 @@ content_filter.checkMessage('message')
 # Returns bool of wether it found language from the filter in the message
 
 content_filter.checkMessageList('message')
-# Returns a list of the words it found, the number of each word, and a censored version if it found anything and returns False if it did not.
+# Returns a list of the words it found, the number of each word, and a censored version if it found anything. If nothing is found, this list will be empty.
 ```
 
 ### Adding Words to the Filter
@@ -227,13 +227,13 @@ import content_filter
 content_filter.useCustomListFile('./customFilter.json', __file__)
 
 content_filter.checkMessageList('Hello there!')
-# False
+# []
 
 content_filter.checkMessageList('Welcome word1!')
 # [{'word': 'word1', 'censored': 'w0rd1', 'count': 1}]
 
 content_filter.checkMessageList('What the f***!')
-# False
+# []
 
 content_filter.checkMessageList('Hi, contains word2!')
 # [{'word': 'word2', 'censored': 'w0rd2', 'count': 1}]
