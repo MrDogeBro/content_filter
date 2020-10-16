@@ -83,8 +83,12 @@ def defaultCheck(message, customWordList, exceptionList, additionalList, useDefa
 
         # goes through all of the words in the filter and checks if any are in the message
         for word in filterData['conditionFilter']:
-            if ' ' + word['find'] in filterMsgContent or word['find'] in filterMsgContent[:len(word['find'])]:
-                return True  # exits the check so that it doesn't fire multiple times
+            if word['require_space']:
+                if ' ' + word['find'] in filterMsgContent or word['find'] in filterMsgContent[:len(word['find'])]:
+                    return True  # exits the check so that it doesn't fire multiple times
+            else:
+                if word['find'] in filterMsgContent or word['find'] in filterMsgContent[:len(word['find'])]:
+                    return True  # exits the check so that it doesn't fire multiple times
 
     else:
         # goes through all of the words in the filter and checks if any are in the message
@@ -204,14 +208,23 @@ def listCheck(message, customWordList, exceptionList, additionalList, useDefault
 
         # goes through all of the words in the filter and checks if any are in the message
         for word in filterData['conditionFilter']:
-            wordFound = ' ' + \
-                word['find'] in filterMsgContent or word['find'] in filterMsgContent[:len(
+            if word['require_space']:
+                wordFound = ' ' + \
+                    word['find'] in filterMsgContent or word['find'] in filterMsgContent[:len(
+                        word['find'])]
+
+                if wordFound:
+                    wordFoundRegex = re.findall(word['find'], filterMsgContent)
+                    wordsFoundList.append(
+                        {'word': word['word'], 'censored': word['censored'], 'count': len(wordFoundRegex)})
+            else:
+                wordFound = word['find'] in filterMsgContent or word['find'] in filterMsgContent[:len(
                     word['find'])]
 
-            if wordFound:
-                wordFoundRegex = re.findall(word['find'], filterMsgContent)
-                wordsFoundList.append(
-                    {'word': word['word'], 'censored': word['censored'], 'count': len(wordFoundRegex)})
+                if wordFound:
+                    wordFoundRegex = re.findall(word['find'], filterMsgContent)
+                    wordsFoundList.append(
+                        {'word': word['word'], 'censored': word['censored'], 'count': len(wordFoundRegex)})
 
     else:
         # goes through all of the words in the filter and checks if any are in the message
