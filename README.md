@@ -118,7 +118,7 @@ To use a custom JSON file, you need to follow the specific structure that is sta
 
 Next is the `"dontFilter"` which can either be null (None) or a list of strings to remove from the filter. If you set the value to null, this indicates to the filter that you want it to use the default list of words to not filter for. If you set the value to a list of strings, the filter will only not filter the strings in the list.
 
-Finally, there is the `"conditionFilter"`, which is how you can make the filter only look for a specific word with no characters after it or before it as well as making spacing matter. This could be viewed as a strict filter where it will only find the word if the specific conditions are met exactly. The condition filter also follows the same standard as the main filter, being a list of dictionaries, each containing the find, word, and censored version.
+Finally, there is the `"conditionFilter"`, which is how you can make the filter only look for a specific word with no characters after it or before it as well as making spacing matter. This could be viewed as a strict filter where it will only find the word if the specific conditions are met exactly. The condition filter also follows the same standard as the main filter, being a list of dictionaries, each containing the find, word, and censored version but adds on one more thing. The thing it adds on is the `"require_space"` which is a bool that tells the filter wether the word needs to have a space before it or not.
 
 If you ever want to make any of the filters blank, just put a empty list in the filter field, you want to contain nothing.
 
@@ -130,7 +130,12 @@ If you ever want to make any of the filters blank, just put a empty list in the 
   ],
   "dontFilter": ["word"],
   "conditionFilter": [
-    { "find": "find", "word": "word", "censored": "censored" }
+    {
+      "find": "find",
+      "word": "word",
+      "censored": "censored",
+      "require_space": true
+    }
   ]
 }
 ```
@@ -214,7 +219,12 @@ This is the most advanced use case for the module. In this example, the user is 
   ],
   "dontFilter": ["word"],
   "conditionFilter": [
-    { "find": "find", "word": "word", "censored": "censored" }
+    {
+      "find": "find",
+      "word": "word",
+      "censored": "censored",
+      "require_space": true
+    }
   ]
 }
 ```
