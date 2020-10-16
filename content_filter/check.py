@@ -124,7 +124,7 @@ def listCheck(message, customWordList, exceptionList, additionalList, useDefault
         # gets all of the words to filter for
         with open(file) as f:
             filterData = json.load(f)
-    
+
     elif useCustomFile:
         filterData = useCustomFile
 
@@ -178,7 +178,7 @@ def listCheck(message, customWordList, exceptionList, additionalList, useDefault
             except:
                 # gets rid of the words that shouldn't be filtered so that the filter wont find them
                 filterMsgContent = filterMsgContent.replace(word, '')
-    
+
     # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
     filterMsgContent = filterMsgContent.replace('a$', 'a##').replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace(
         '+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#')
@@ -246,4 +246,4 @@ def listCheck(message, customWordList, exceptionList, additionalList, useDefault
                 wordsFoundList.append(
                     {'word': word, 'count': len(wordFound)})
 
-    return wordsFoundList if wordsFoundList else False
+    return wordsFoundList
