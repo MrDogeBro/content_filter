@@ -1,4 +1,8 @@
-# filter.py
+"""
+filter.py
+
+The main file that is the hub of all operations
+"""
 
 import json
 import os

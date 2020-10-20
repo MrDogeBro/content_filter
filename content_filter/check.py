@@ -1,3 +1,9 @@
+"""
+check.py
+
+Checks message to see if they contain any words in the filter
+"""
+
 import json
 import re
 
