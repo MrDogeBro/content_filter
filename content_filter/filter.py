@@ -34,6 +34,7 @@ def _makeListsLower(listName):
 
 def setup():
     global setup_finished
+    global replacement_table
 
     if not setup_finished:
         replacement_file = os.path.join(os.path.dirname(
