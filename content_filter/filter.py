@@ -15,6 +15,8 @@ customWordList = []
 useDefaultList = True
 useCustomFile = False
 customJSONFile = None
+setup_finished = False
+replacement_table = None
 
 
 def _makeListsLower(listName):
@@ -28,6 +30,24 @@ def _makeListsLower(listName):
 
     else:
         pass
+
+
+def setup():
+    global setup_finished
+
+    if not setup_finished:
+        replacement_file = os.path.join(os.path.dirname(
+            os.path.abspath(__file__)), 'data/replacements.json')
+
+        with open(replacement_file) as f:
+            loaded_replacements = json.load(f)
+
+        replacement_table = {
+            'single': str.maketrans(loaded_replacements['single_char']),
+            'multi': loaded_replacements['multi_char']
+        }
+
+        setup_finished = True
 
 
 def _changeListChars(listName):
