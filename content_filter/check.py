@@ -7,8 +7,10 @@ Checks message to see if they contain any words in the filter
 import json
 import re
 
+from .translations import return_translated
 
-def defaultCheck(message, customWordList, exceptionList, additionalList, useDefaultList, useCustomFile, file=None):
+
+def defaultCheck(message, customWordList, exceptionList, additionalList, useDefaultList, useCustomFile, replacement_table, file=None):
     filterMsgContent = message.lower()
     filterData = None
 
@@ -73,8 +75,7 @@ def defaultCheck(message, customWordList, exceptionList, additionalList, useDefa
                 filterMsgContent = filterMsgContent.replace(word, '')
 
     # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
-    filterMsgContent = filterMsgContent.replace('a$', 'a##').replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace(
-        '+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#')
+    filterMsgContent = return_translated(replacement_table, filterMsgContent)
 
     if not customWordList:
         # goes through all of the words in the filter and checks if any are in the message
@@ -108,8 +109,8 @@ def defaultCheck(message, customWordList, exceptionList, additionalList, useDefa
                 filterMsgContent = filterMsgContent.replace(word, '')
 
         # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
-        filterMsgContent = filterMsgContent.replace('a$', 'a##').replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace(
-            '+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#')
+        filterMsgContent = return_translated(
+            replacement_table, filterMsgContent)
 
         # goes through all of the words in the filter and checks if any are in the message
         for word in customWordList:
@@ -124,7 +125,7 @@ def defaultCheck(message, customWordList, exceptionList, additionalList, useDefa
     return False
 
 
-def listCheck(message, customWordList, exceptionList, additionalList, useDefaultList, useCustomFile, file=None):
+def listCheck(message, customWordList, exceptionList, additionalList, useDefaultList, useCustomFile, replacement_table, file=None):
 
     filterMsgContent = message.lower()
     wordsFoundList = []
@@ -190,8 +191,7 @@ def listCheck(message, customWordList, exceptionList, additionalList, useDefault
                 filterMsgContent = filterMsgContent.replace(word, '')
 
     # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
-    filterMsgContent = filterMsgContent.replace('a$', 'a##').replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace(
-        '+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#')
+    filterMsgContent = return_translated(replacement_table, filterMsgContent)
 
     if not customWordList:
         # goes through all of the words in the filter and checks if any are in the message
@@ -244,8 +244,8 @@ def listCheck(message, customWordList, exceptionList, additionalList, useDefault
                 filterMsgContent = filterMsgContent.replace(word, '')
 
         # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
-        filterMsgContent = filterMsgContent.replace('a$', 'a##').replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace(
-            '+', 't').replace('!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#')
+        filterMsgContent = return_translated(
+            replacement_table, filterMsgContent)
 
         # goes through all of the words in the filter and checks if any are in the message
         for word in customWordList:
