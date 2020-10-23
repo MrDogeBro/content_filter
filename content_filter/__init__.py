@@ -20,4 +20,4 @@ __version__ = '1.2.0'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2020-2020 MrDogeBro'
 
-from .filter import checkMessage, checkMessageList, addExceptions, addWords, useCustomList, useCustomListFile, updateListFromFile
+from .filter import checkMessage, checkMessageList, addExceptions, addWords, useCustomList, useCustomListFile, updateListFromFile, setup
