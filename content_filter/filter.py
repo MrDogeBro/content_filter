@@ -208,11 +208,14 @@ def checkMessage(message):
         did not find anything of interest in the text provided.
     """
 
+    if not setup_finished:
+        setup()
+
     filterContentFile = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), 'data/filter.json')
 
     return defaultCheck(message, customWordList, exceptionList, additionalList,
-                        useDefaultList, useCustomFile, filterContentFile)
+                        useDefaultList, useCustomFile, replacement_table, filterContentFile)
 
 
 def checkMessageList(message):
@@ -234,8 +237,11 @@ def checkMessageList(message):
         did not find anything of interest in the text provided.
     """
 
+    if not setup_finished:
+        setup()
+
     filterContentFile = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), 'data/filter.json')
 
     return listCheck(message, customWordList, exceptionList, additionalList,
-                     useDefaultList, useCustomFile, filterContentFile)
+                     useDefaultList, useCustomFile, replacement_table, filterContentFile)
