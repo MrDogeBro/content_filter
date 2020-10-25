@@ -16,3 +16,7 @@ def return_translated(translation_table: dict, string: str):
         lambda match: translation_table['multi'][match.group(0)], translated_str)
 
     return translated_str
+
+
+def return_possibilities():
+    pass

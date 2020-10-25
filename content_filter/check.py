@@ -7,7 +7,7 @@ Checks message to see if they contain any words in the filter
 import json
 import re
 
-from .translations import return_translated
+from .string import return_translated
 
 
 def defaultCheck(message, customWordList, exceptionList, additionalList, useDefaultList, useCustomFile, replacement_table, file=None):
