@@ -9,9 +9,9 @@ import os
 
 from .check import defaultCheck, listCheck
 
-exceptionList = []
-additionalList = []
-customWordList = []
+exceptionList = []  # type: list
+additionalList = []  # type: list
+customWordList = []  # type: list
 useDefaultList = True
 useCustomFile = False
 customJSONFile = None
