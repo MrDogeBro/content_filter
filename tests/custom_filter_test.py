@@ -1,6 +1,7 @@
 import unittest
 import content_filter
 
+
 class TestCustomFilter(unittest.TestCase):
     def custom_filter_test(self):
         self.assertEqual(content_filter.checkMessage("fuck"), True)
@@ -12,7 +13,7 @@ class TestCustomFilter(unittest.TestCase):
         self.assertEqual(content_filter.checkMessage("check"), False)
         self.assertEqual(content_filter.checkMessage("wtf"), False)
         self.assertEqual(content_filter.checkMessage("how u"), False)
-        
+
         content_filter.useCustomList(['testing', 'check', 'wtf', 'how u'])
         self.assertEqual(content_filter.checkMessage("fuck"), False)
         self.assertEqual(content_filter.checkMessage("bitch"), False)

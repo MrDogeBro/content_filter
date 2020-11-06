@@ -1,16 +1,22 @@
-# filter.py
+"""
+filter.py
+
+The main file that is the hub of all operations
+"""
 
 import json
 import os
 
 from .check import defaultCheck, listCheck
 
-exceptionList = []
-additionalList = []
-customWordList = []
+exceptionList = []  # type: list
+additionalList = []  # type: list
+customWordList = []  # type: list
 useDefaultList = True
 useCustomFile = False
 customJSONFile = None
+setup_finished = False
+replacement_table = None
 
 
 def _makeListsLower(listName):
@@ -24,6 +30,25 @@ def _makeListsLower(listName):
 
     else:
         pass
+
+
+def setup():
+    global setup_finished
+    global replacement_table
+
+    if not setup_finished:
+        replacement_file = os.path.join(os.path.dirname(
+            os.path.abspath(__file__)), 'data/replacements.json')
+
+        with open(replacement_file) as f:
+            loaded_replacements = json.load(f)
+
+        replacement_table = {
+            'single': str.maketrans(loaded_replacements['single_char']),
+            'multi': loaded_replacements['multi_char']
+        }
+
+        setup_finished = True
 
 
 def _changeListChars(listName):
@@ -184,11 +209,14 @@ def checkMessage(message):
         did not find anything of interest in the text provided.
     """
 
+    if not setup_finished:
+        setup()
+
     filterContentFile = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), 'data/filter.json')
 
     return defaultCheck(message, customWordList, exceptionList, additionalList,
-                        useDefaultList, useCustomFile, filterContentFile)
+                        useDefaultList, useCustomFile, replacement_table, filterContentFile)
 
 
 def checkMessageList(message):
@@ -210,8 +238,11 @@ def checkMessageList(message):
         did not find anything of interest in the text provided.
     """
 
+    if not setup_finished:
+        setup()
+
     filterContentFile = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), 'data/filter.json')
 
     return listCheck(message, customWordList, exceptionList, additionalList,
-                     useDefaultList, useCustomFile, filterContentFile)
+                     useDefaultList, useCustomFile, replacement_table, filterContentFile)

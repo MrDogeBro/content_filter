@@ -12,10 +12,12 @@ license: MIT, see LICENSE for more details.
 
 """
 
-__title__ = 'Content Filter'
+__title__ = 'content-filter'
+__description__ = 'A basic but robust content filter for python.'
 __author__ = 'MrDogeBro'
+
+__version__ = '1.2.0'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2020-2020 MrDogeBro'
-__version__ = '1.0.0'
 
-from .filter import checkMessage, checkMessageList, addExceptions, addWords, useCustomList, useCustomListFile, updateListFromFile
+from .filter import checkMessage, checkMessageList, addExceptions, addWords, useCustomList, useCustomListFile, updateListFromFile, setup
