@@ -32,7 +32,7 @@ def return_possibilities(message):
 
     for index, char in enumerate(chars):
         for letter in char:
-            letter += f'{index}'
+            letter += str(index)
             chars_combined.append(letter)
 
     for combo in combinations(chars_combined, len(chars)):
@@ -50,7 +50,7 @@ def return_possibilities(message):
 
         for index, letter in enumerate(combo):
             modified_message = modified_message.replace(
-                f'({found_statements[index]})', letter, 1)
+                '(' + found_statements[index] + ')', letter, 1)
 
         results.append(modified_message)
 
