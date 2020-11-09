@@ -50,7 +50,7 @@ def return_possibilities(message):
 
         for index, letter in enumerate(combo):
             modified_message = modified_message.replace(
-                '(' + found_statements[index] + ')', letter, 1)
+                '({found_statements})'.format(found_statements=found_statements[index]), letter, 1)
 
         results.append(modified_message)
 
