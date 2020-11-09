@@ -16,8 +16,8 @@ __title__ = 'content-filter'
 __description__ = 'A basic but robust content filter for python.'
 __author__ = 'MrDogeBro'
 
-__version__ = '1.2.0'
+__version__ = '2.0.0'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2020-2020 MrDogeBro'
 
-from .filter import checkMessage, checkMessageList, addExceptions, addWords, useCustomList, useCustomListFile, updateListFromFile, setup
+from content_filter.filter import Filter
