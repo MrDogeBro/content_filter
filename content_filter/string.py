@@ -4,8 +4,8 @@ translations.py
 Handles the translations of charaters in messages
 """
 
-import re
 from itertools import combinations
+import re
 from unicodedata import normalize
 
 
