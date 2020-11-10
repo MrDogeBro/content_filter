@@ -11,6 +11,9 @@ from content_filter.string import return_translated, return_possibilities
 
 
 class Check:
+    """Check object which checks a message and can return the results
+    as either a list or a bool."""
+
     def __init__(self, message, exception_list, additional_list, custom_list, use_default_list, use_custom_file, translation_table, filter_file):
         self.message = message
         self._exception_list = exception_list
@@ -25,10 +28,14 @@ class Check:
 
     @property
     def as_bool(self) -> bool:
+        """Returns the results of the check as a bool."""
+
         return bool(self._check_results)
 
     @property
     def as_list(self) -> list:
+        """Returns the results of the check as a list."""
+
         return self._check_results
 
     def _check_message(self) -> list:
