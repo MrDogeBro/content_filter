@@ -14,7 +14,17 @@ class Check:
     """Check object which checks a message and can return the results
     as either a list or a bool."""
 
-    def __init__(self, message, exception_list, additional_list, custom_list, use_default_list, use_custom_file, translation_table, filter_file):
+    def __init__(
+        self,
+        message,
+        exception_list,
+        additional_list,
+        custom_list,
+        use_default_list,
+        use_custom_file,
+        translation_table,
+        filter_file,
+    ):
         self.message = message
         self._exception_list = exception_list
         self._additional_list = additional_list
@@ -28,13 +38,22 @@ class Check:
 
     @property
     def as_bool(self) -> bool:
-        """Returns the results of the check as a bool."""
+        """Outputs the check results as a bool.
+
+        Returns:
+            :obj:`bool`: True if the message contains a filter word, False if it doesn't.
+        """
 
         return bool(self._check_results)
 
     @property
     def as_list(self) -> list:
-        """Returns the results of the check as a list."""
+        """Outputs the check results as a list.
+
+        Returns:
+            :obj:`list`: List of all the words found in the message. A blank list is
+                returned if no words are found.
+        """
 
         return self._check_results
 
@@ -43,8 +62,7 @@ class Check:
         filter_data = {}
 
         # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
-        msg_content = return_translated(
-            self._translation_table, self.message.lower())
+        msg_content = return_translated(self._translation_table, self.message.lower())
         msg_combos = return_possibilities(msg_content)
 
         if self._use_default_list:
@@ -57,14 +75,13 @@ class Check:
 
         for index, combo in enumerate(msg_combos):
             if not self._custom_list:
-                if filter_data['dontFilter'] is not None:
+                if filter_data["dontFilter"] is not None:
                     # goes through all of the words in the filter and checks if any are in the message
-                    for word in filter_data['dontFilter']:
+                    for word in filter_data["dontFilter"]:
                         # checks for words that should not be filtered in teh message
                         if word in combo:
                             # gets rid of the words that shouldn't be filtered so that the filter wont find them
-                            msg_combos[index] = msg_combos[index].replace(
-                                word, '')
+                            msg_combos[index] = msg_combos[index].replace(word, "")
 
                 else:
                     # gets default list of words
@@ -72,42 +89,41 @@ class Check:
                         default_list = json.load(f)
 
                     # goes through all of the words in the filter and checks if any are in the message
-                    for word in default_list['dontFilter']:
+                    for word in default_list["dontFilter"]:
                         # checks for words that should not be filtered in the message
                         if word in combo:
                             # gets rid of the words that shouldn't be filtered so that the filter wont find them
-                            msg_combos[index] = msg_combos[index].replace(
-                                word, '')
+                            msg_combos[index] = msg_combos[index].replace(word, "")
 
             # goes through all of the words in the filter and checks if any are in the message
             for word in self._exception_list:
                 if not self._custom_list:
                     # checks for words that should not be filtered in the message
-                    for string in filter_data['mainFilter']:
-                        if string['find'] in self._exception_list:
+                    for string in filter_data["mainFilter"]:
+                        if string["find"] in self._exception_list:
                             try:
-                                filter_data['mainFilter'].pop(
-                                    filter_data['mainFilter'].index(string))
+                                filter_data["mainFilter"].pop(
+                                    filter_data["mainFilter"].index(string)
+                                )
 
                             except:
                                 # gets rid of the words that shouldn't be filtered so that the filter wont find them
-                                msg_combos[index] = msg_combos[index].replace(
-                                    word, '')
+                                msg_combos[index] = msg_combos[index].replace(word, "")
 
                     # checks for words that should not be filtered in the message
-                    for string in filter_data['conditionFilter']:
-                        if string['find'] in self._exception_list:
+                    for string in filter_data["conditionFilter"]:
+                        if string["find"] in self._exception_list:
                             try:
-                                filter_data['conditionFilter'].pop(
-                                    filter_data['conditionFilter'].index(string))
+                                filter_data["conditionFilter"].pop(
+                                    filter_data["conditionFilter"].index(string)
+                                )
 
                             except:
                                 # gets rid of the words that shouldn't be filtered so that the filter wont find them
-                                msg_combos[index] = msg_combos[index].replace(
-                                    word, '')
+                                msg_combos[index] = msg_combos[index].replace(word, "")
 
                     if word in combo:
-                        msg_combos[index] = msg_combos[index].replace(word, '')
+                        msg_combos[index] = msg_combos[index].replace(word, "")
 
                 else:
                     # checks for words that should not be filtered in the message
@@ -116,49 +132,88 @@ class Check:
 
                     except:
                         # gets rid of the words that shouldn't be filtered so that the filter wont find them
-                        msg_combos[index] = msg_combos[index].replace(word, '')
+                        msg_combos[index] = msg_combos[index].replace(word, "")
 
         for combo in msg_combos:
             if not self._custom_list:
                 # goes through all of the words in the filter and checks if any are in the message
-                for word in filter_data['mainFilter']:
-                    word_found = [(m.start(), m.end()) for m in re.finditer(
-                        '+[.!-]*'.join(c for c in word['find']), combo.replace(' ', ''))]
+                for word in filter_data["mainFilter"]:
+                    word_found = [
+                        (m.start(), m.end())
+                        for m in re.finditer(
+                            "+[.!-]*".join(c for c in word["find"]),
+                            combo.replace(" ", ""),
+                        )
+                    ]
 
-                    if (word_found):
+                    if word_found:
                         words_found.append(
-                            {'word': word['word'], 'censored': word['censored'], 'count': len(word_found), 'indexes': word_found})
+                            {
+                                "word": word["word"],
+                                "censored": word["censored"],
+                                "count": len(word_found),
+                                "indexes": word_found,
+                            }
+                        )
 
                 # goes through all of the words in the filter and checks if any are in the message
                 for word in self._additional_list:
-                    word_found = [(m.start(), m.end()) for m in re.finditer(
-                        '+[.!-]*'.join(c for c in word), combo.replace(' ', ''))]
+                    word_found = [
+                        (m.start(), m.end())
+                        for m in re.finditer(
+                            "+[.!-]*".join(c for c in word), combo.replace(" ", "")
+                        )
+                    ]
 
-                    if (word_found):
+                    if word_found:
                         words_found.append(
-                            {'word': word, 'count': len(word_found), 'indexes': word_found})
+                            {
+                                "word": word,
+                                "count": len(word_found),
+                                "indexes": word_found,
+                            }
+                        )
 
                 # goes through all of the words in the filter and checks if any are in the message
-                for word in filter_data['conditionFilter']:
-                    if word['require_space']:
-                        condition_found = ' ' + \
-                            word['find'] in combo or word['find'] in combo[:len(
-                                word['find'])]
+                for word in filter_data["conditionFilter"]:
+                    if word["require_space"]:
+                        condition_found = (
+                            " " + word["find"] in combo
+                            or word["find"] in combo[: len(word["find"])]
+                        )
 
                         if condition_found:
-                            word_found_regex = [(m.start(), m.end()) for m in re.finditer(
-                                word['find'], combo)]
+                            word_found_regex = [
+                                (m.start(), m.end())
+                                for m in re.finditer(word["find"], combo)
+                            ]
                             words_found.append(
-                                {'word': word['word'], 'censored': word['censored'], 'count': len(word_found_regex), 'indexes': word_found_regex})
+                                {
+                                    "word": word["word"],
+                                    "censored": word["censored"],
+                                    "count": len(word_found_regex),
+                                    "indexes": word_found_regex,
+                                }
+                            )
                     else:
-                        condition_found = word['find'] in combo or word['find'] in combo[:len(
-                            word['find'])]
+                        condition_found = (
+                            word["find"] in combo
+                            or word["find"] in combo[: len(word["find"])]
+                        )
 
                         if condition_found:
-                            word_found_regex = [(m.start(), m.end()) for m in re.finditer(
-                                word['find'], combo)]
+                            word_found_regex = [
+                                (m.start(), m.end())
+                                for m in re.finditer(word["find"], combo)
+                            ]
                             words_found.append(
-                                {'word': word['word'], 'censored': word['censored'], 'count': len(word_found_regex), 'indexes': word_found_regex})
+                                {
+                                    "word": word["word"],
+                                    "censored": word["censored"],
+                                    "count": len(word_found_regex),
+                                    "indexes": word_found_regex,
+                                }
+                            )
 
             else:
                 # goes through all of the words in the filter and checks if any are in the message
@@ -169,38 +224,62 @@ class Check:
 
                     except:
                         # gets rid of the words that shouldn't be filtered so that the filter wont find them
-                        combo = combo.replace(word, '')
+                        combo = combo.replace(word, "")
 
                 # goes through all of the words in the filter and checks if any are in the message
                 for word in self._custom_list:
-                    word_found = [(m.start(), m.end()) for m in re.finditer(
-                        '+[.!-]*'.join(c for c in word), combo.replace(' ', ''))]
+                    word_found = [
+                        (m.start(), m.end())
+                        for m in re.finditer(
+                            "+[.!-]*".join(c for c in word), combo.replace(" ", "")
+                        )
+                    ]
 
-                    if (word_found):
+                    if word_found:
                         words_found.append(
-                            {'word': word, 'count': len(word_found), 'indexes': word_found})
+                            {
+                                "word": word,
+                                "count": len(word_found),
+                                "indexes": word_found,
+                            }
+                        )
 
                 # goes through all of the words in the filter and checks if any are in the message
                 for word in self._additional_list:
-                    word_found = [(m.start(), m.end()) for m in re.finditer(
-                        '+[.!-]*'.join(c for c in word), combo.replace(' ', ''))]
+                    word_found = [
+                        (m.start(), m.end())
+                        for m in re.finditer(
+                            "+[.!-]*".join(c for c in word), combo.replace(" ", "")
+                        )
+                    ]
 
-                    if (word_found):
+                    if word_found:
                         words_found.append(
-                            {'word': word, 'count': len(word_found), 'indexes': word_found})
+                            {
+                                "word": word,
+                                "count": len(word_found),
+                                "indexes": word_found,
+                            }
+                        )
 
         to_remove: list = []
 
         for match in words_found:
-            if [w['word'] for w in words_found].count(match['word']) > 1:
-                if words_found.count(match) > 1 and to_remove.count(match) < (words_found.count(match) - 1):
+            if [w["word"] for w in words_found].count(match["word"]) > 1:
+                if words_found.count(match) > 1 and to_remove.count(match) < (
+                    words_found.count(match) - 1
+                ):
                     to_remove.append(match)
 
                 else:
-                    index_len = ([i['count'] for i in words_found if i['word'] == match['word']], [
-                        i for i in words_found if i['word'] == match['word']])
+                    index_len = (
+                        [i["count"] for i in words_found if i["word"] == match["word"]],
+                        [i for i in words_found if i["word"] == match["word"]],
+                    )
 
-                    if index_len[1][index_len[0].index(max(index_len[0]))] != match and to_remove.count(match) < words_found.count(match):
+                    if index_len[1][
+                        index_len[0].index(max(index_len[0]))
+                    ] != match and to_remove.count(match) < words_found.count(match):
                         to_remove.append(match)
 
         for rem in to_remove:
@@ -209,4 +288,4 @@ class Check:
         return words_found
 
     def __repr__(self):
-        return '<Check: message=\'{message}\'>'.format(message=self.message)
+        return "<Check: message='{message}'>".format(message=self.message)
