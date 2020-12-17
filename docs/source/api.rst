@@ -1,5 +1,5 @@
 API
-======
+===
 
 .. module:: content_filter
 
