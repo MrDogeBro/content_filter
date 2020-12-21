@@ -33,8 +33,8 @@ $(document).ready(() => {
   $('#themeSwitcher').click(switchTheme);
 
   $('footer').html(
-    $('footer').html().slice(0, -1) +
-      ' and a dark mode by <a href="http://mrdogebro.com">MrDogeBro</a>.'
+    $('footer').html() +
+      'Dark theme provided by <a href="http://mrdogebro.com">MrDogeBro</a>.'
   );
 });
 
