@@ -32,7 +32,8 @@ html[data-theme='dark'] .highlight .nb {
 }
 
 html[data-theme='dark'] .highlight .kn,
-html[data-theme='dark'] .highlight .kc {
+html[data-theme='dark'] .highlight .kc,
+html[data-theme='dark'] .highlight .k {
   color: #41c2ea;
 }
 
