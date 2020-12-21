@@ -31,6 +31,11 @@ $(document).ready(() => {
   createThemeSwitcher();
 
   $('#themeSwitcher').click(switchTheme);
+
+  $('footer').html(
+    $('footer').html().slice(0, -1) +
+      ' and a dark mode by <a href="http://mrdogebro.com">MrDogeBro</a>.'
+  );
 });
 
 const switchTheme = () => {
