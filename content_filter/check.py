@@ -51,8 +51,7 @@ class Check:
         """Outputs the check results as a list.
 
         Returns:
-            :obj:`list`: List of all the words found in the message. A blank list is
-                returned if no words are found.
+            :obj:`list`: List of all the words found in the message. A blank list is returned if no words are found.
         """
 
         return self._check_results
