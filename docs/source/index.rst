@@ -9,6 +9,10 @@ Content Filter Documentation
 .. toctree::
    :maxdepth: 2
 
+   install
+   quickstart
+   usage
+   examples
    api
 
 
