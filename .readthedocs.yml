@@ -7,13 +7,15 @@ build:
 sphinx:
   builder: html
   configuration: docs/conf.py
-  fail_on_warning: false
+  fail_on_warning: true
 
 python:
   version: 3.7
-  install: 
-    - method: pip
+  install:
     - requirements: docs/requirements.txt
-    path: .
-    extra_requirements:
-      - docs
+    - method: pip
+      path: .
+      extra_requirements:
+        - docs
+    - method: setuptools
+  system_packages: true
