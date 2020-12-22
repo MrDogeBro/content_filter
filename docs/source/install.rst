@@ -1,16 +1,25 @@
-Getting Started
-===============
+Installing Content Filter
+=========================
 
-To get started, just make sure you have pip installed. If you use python, you probably already have pip installed as a lot of modules and libraries distribute via pip and it is the default distribution service for python.
+**Python 3.4 or higher is required**
 
-Python Version
---------------
+To install Content Filter, enter the following command in any sort of terminal window or command prompt.
 
-Please make sure that you have Python 3.4 or above installed or else the module will not work.
+::
 
-Installation
-------------
+    # Linux/OSX
+    python3 -m pip install content-filter
 
-To install Content Filter, enter the following command in any sort of terminal window or command prompt. ::
+    # Windows
+    py -3 -m pip install content-filter
 
-    $ pip install content-filter
+Getting the Source Code
+-----------------------
+
+To get the source code, you can clone the `GitHub repository <https://github.com/MrDogeBro/content_filter>`_ using git. Once you have a copy of the source code, you can install it into your site-packages.
+
+::
+
+    $ git clone https://github.com/MrDogeBro/content_filter
+    $ cd content_filter
+    $ python3 -m pip install .
