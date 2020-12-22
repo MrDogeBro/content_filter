@@ -15,7 +15,7 @@ setuptools.setup(
     url='https://github.com/MrDogeBro/content_filter',
     download_url=f'https://github.com/MrDogeBro/content_filter/archive/v{content_filter.__version__}.tar.gz',
     packages=setuptools.find_packages(),
-    package_data={'content_filter': ['data/filter.json']},
+    package_data={'content_filter': ['data/filter.json', 'data/replacements.json']},
     license=content_filter.__license__,
     classifiers=[
         'Development Status :: 5 - Production/Stable',

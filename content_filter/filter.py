@@ -5,244 +5,211 @@ The main file that is the hub of all operations
 """
 
 import json
-import os
+from pathlib import Path
 
-from .check import defaultCheck, listCheck
-
-exceptionList = []  # type: list
-additionalList = []  # type: list
-customWordList = []  # type: list
-useDefaultList = True
-useCustomFile = False
-customJSONFile = None
-setup_finished = False
-replacement_table = None
+from content_filter.check import Check
+from content_filter.string import return_translated
 
 
-def _makeListsLower(listName):
-    if listName == 'exceptionList':
-        global exceptionList
-        listName = [i.lower() for i in listName]
+class Filter:
+    """The filter object which contains the filter settings,
+    data, and functions.
 
-    elif listName == 'additionalList':
-        global exceptionList
-        listName = [i.lower() for i in listName]
+    Args:
+        list_file (str, optional): The path to a file that will be used as the filter
+            list in place of the default filter
+        word_list (str, optional): A list of words to be used as the filter in place
+            of the default filter
 
-    else:
-        pass
+    Raises:
+        TypeError: Something other than a :class:`list` was not passed in for word_list.
+        FileNotFoundError: The input file for list_file does not exist.
+        ValueError: The custom file input is not a JSON file.
+    """
 
+    def __init__(self, list_file=None, word_list=None):
+        self.exception_list = []  # type: list
+        self.additional_list = []  # type: list
+        self.custom_list = (
+            [word.replace(" ", "") for word in word_list]
+            if isinstance(word_list, list)
+            else []
+        )
+        self._use_default_list = True
+        self._use_custom_file = False
+        self.custom_json_file = None
+        self._translation_table = None
+        self._filter_file = Path.joinpath(
+            Path(__file__).resolve().parent, "data/filter.json"
+        )
 
-def setup():
-    global setup_finished
-    global replacement_table
+        # ==== LOAD TRANSLATIONS ====
 
-    if not setup_finished:
-        replacement_file = os.path.join(os.path.dirname(
-            os.path.abspath(__file__)), 'data/replacements.json')
+        translations_file = Path.joinpath(
+            Path(__file__).resolve().parent, "data/replacements.json"
+        )
 
-        with open(replacement_file) as f:
-            loaded_replacements = json.load(f)
+        with open(str(translations_file)) as f:
+            loaded_translations = json.load(f)
 
-        replacement_table = {
-            'single': str.maketrans(loaded_replacements['single_char']),
-            'multi': loaded_replacements['multi_char']
+        self._translation_table = {
+            "single": str.maketrans(loaded_translations["single_char"]),
+            "multi": loaded_translations["multi_char"],
         }
 
-        setup_finished = True
+        # ==== CUSTOM FILE CHECK ====
 
+        if list_file:
+            if not Path(list_file).is_absolute():
+                rel_list_file = Path.joinpath(Path.cwd(), list_file)
 
-def _changeListChars(listName):
-    if listName == 'exceptionList':
-        global exceptionList
-        exceptionList = [i.replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace(
-            '!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#') for i in exceptionList]
+            self.custom_json_file = Path(rel_list_file if rel_list_file else list_file)
 
-    elif listName == 'additionalList':
-        global additionalList
-        additionalList = [i.replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace(
-            '!', 'i').replace('@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#') for i in additionalList]
+            if self.custom_json_file.suffix != ".json":
+                raise ValueError(
+                    "list_file expected .json file but got "
+                    + self.custom_json_file.suffix
+                )
 
-    elif listName == 'customList':
-        global customWordList
-        customWordList = [i.replace('"', '').replace(',', '').replace('.', '').replace('-', '').replace("'", '').replace('+', 't').replace('!', 'i').replace(
-            '@', 'a').replace('1', 'i').replace('0', 'o').replace('3', 'e').replace('$', 's').replace('*', '#').replace(' ', '') for i in customWordList]
+            with open(str(self.custom_json_file)) as f:
+                self._use_custom_file = json.load(f)
 
-    else:
-        pass
+            self._use_default_list = False
 
+        # ==== CUSTOM LIST CHECK ====
 
-def useCustomList(wordList):
-    """Allows the user to define a custom list of words to filter for.
-    Keep in mind that this will completely override the default filter,
-    meaning that any words defined in the default filter will now have
-    to be manually added by the user if they desire for those words to
-    be filtered. If you would just like to add on or remove from the
-    existing, please check out our [GitHub](https://github.com/MrDogeBro/content_filter)
+        if word_list and not isinstance(word_list, list):
+            raise TypeError(
+                "word_list expects list but got " + str(type(word_list).__name__)
+            )
 
-    Paramaters:
-    ----------
-    words:
-        The words that the filter will check for. This can be in the
-        form of a single string or an array of strings.
-    """
-    global customWordList
-    global useDefaultList
+        # ==== CHECKING LISTS ====
+        self._lists_to_lower()
+        self._lists_translate()
 
-    if isinstance(wordList, list):
-        customWordList = wordList
+    def _lists_to_lower(self) -> None:
+        if self.custom_list:
+            self.custom_list = [i.lower() for i in self.custom_list]
 
-    else:
-        customWordList = [wordList]
+        self.exception_list = [i.lower() for i in self.exception_list]
+        self.additional_list = [i.lower() for i in self.additional_list]
 
-    useDefaultList = False
-    _changeListChars('customList')
+    def _lists_translate(self) -> None:
+        if self.custom_list:
+            self.custom_list = [
+                return_translated(self._translation_table, i) for i in self.custom_list
+            ]
 
+        self.exception_list = [
+            return_translated(self._translation_table, i) for i in self.exception_list
+        ]
+        self.additional_list = [
+            return_translated(self._translation_table, i) for i in self.additional_list
+        ]
 
-def addExceptions(words=None):
-    """Allows the user to remove words to the list of pre-defined words
-    to filter for. If you would like to completely override the existing
-    filter, please check out our [GitHub](https://github.com/MrDogeBro/content_filter)
+    def _check_type(self, obj: list) -> bool:
+        return bool(obj) and all(isinstance(elem, str) for elem in obj)
 
-    Paramaters:
-    ----------
-    words:
-        The words that will be removed from the default filter to
-        check for. This can be in the form of a single string or an
-        array of strings.
-    """
-    global exceptionList
+    def add_exceptions(self, words: list) -> None:
+        """Allows the user to remove words to the list of pre-defined words
+        to filter for.
 
-    if isinstance(words, list):
-        exceptionList.extend(words)
+        Args:
+            words (list): A list of strings that will be removed from the default filter
+                checking.
 
-    else:
-        exceptionList.extend([words])
+        Raises:
+            TypeError: Words input are not a list of strings.
+        """
 
-    _makeListsLower('exceptionList')
+        if not self._check_type(words) or not isinstance(words, list):
+            raise TypeError("Words input are not a list of strings")
 
+        self.exception_list.extend(words)
 
-def addWords(words=None):
-    """Allows the user to add words to the list of pre-defined words
-    to filter for. If you would like to completely override the existing
-    filter, please check out our [GitHub](https://github.com/MrDogeBro/content_filter)
+        self._lists_to_lower()
+        self._lists_translate()
 
-    Paramaters:
-    ----------
-    words:
-        The words that will be added to the default filter to check
-        for. This can be in the form of a single string or an array
-        of strings.
-    """
-    global additionalList
+    def add_words(self, words: list) -> None:
+        """Allows the user to add words to the list of pre-defined words
+        to filter for.
 
-    if isinstance(words, list):
-        additionalList.extend(words)
+        Args:
+            words (list): A list of strings that will be added to the default filter
+                checking.
 
-    else:
-        additionalList.extend([words])
+        Raises:
+            TypeError: Words input are not a list of strings.
+        """
 
-    _makeListsLower('additionalList')
-    _changeListChars('additionalList')
+        if not self._check_type(words) or not isinstance(words, list):
+            raise TypeError("Words input are not a list of strings")
 
+        self.additional_list.extend(words)
 
-def useCustomListFile(file, currentFile):
-    """Allows the user to define a custom list of words to filter for
-    from a json file. Keep in mind that this will completely override
-    the default filter, meaning that any words defined in the default
-    filter will now have to be manually added by the user if they
-    desire for those words to be filtered. For the structure the json
-    file needs to follow or if you would just like to add on or remove
-    from the existing list, please check out our [GitHub](https://github.com/MrDogeBro/content_filter)
+        self._lists_to_lower()
+        self._lists_translate()
 
-    Paramaters:
-    ----------
-    file:
-        A json file that defines a list of words to filter for. To find
-        out the json file structure, check out our Github (linked above)
-    currentFile:
-        The current file that is calling the function. You pass this in
-        by passing in __file__
-    """
+    def reload_file(self) -> None:
+        """Updates the filter list when using a custom JSON file. If any
+        changes have been made to the file, they will be applied.
 
-    global useCustomFile, useDefaultList, customJSONFile
+        Raises:
+            RuntimeError: Not using a custom JSON file.
+        """
 
-    customJSONFile = os.path.join(os.path.dirname(
-        os.path.abspath(currentFile)), file)
+        if not self._use_custom_file:
+            raise RuntimeError("A custom JSON file to use was never provided")
 
-    with open(customJSONFile) as f:
-        useCustomFile = json.load(f)
+        with open(str(self.custom_json_file)) as f:
+            self._use_custom_file = json.load(f)
 
-    useDefaultList = False
+    def check(self, message: str) -> Check:
+        """Checks the provided message for any words that should be filtered.
 
+        Args:
+            message (str): The message to be filtered. This should be a string.
 
-def updateListFromFile():
-    """Allows the user to update the filter list when using a custom
-    JSON file so that if anything in the JSON file changed the changes
-    are applied to the filter.
-    """
+        Raises:
+            TypeError: Message is not a string
 
-    global useCustomFile
+        Returns:
+            .Check: A check object which contains the results of the filter.
+        """
 
-    if useCustomFile:
-        with open(customJSONFile) as f:
-            useCustomFile = json.load(f)
+        if type(message) is not str:
+            raise TypeError("Message provided is not a string")
 
-    else:
-        raise RuntimeError('A Custom JSON file to use was never provided')
+        return Check(
+            message,
+            self.exception_list,
+            self.additional_list,
+            self.custom_list,
+            self._use_default_list,
+            self._use_custom_file,
+            self._translation_table,
+            self._filter_file,
+        )
 
+    @property
+    def list_file(self) -> Path:
+        """Gives you the path to the list file if using a custom filter file.
 
-def checkMessage(message):
-    """Checks the provided message for any words that should be filtered and
-    returns a value based on if it was able to identify anything.
+        Raises:
+            RuntimeError: Not using a custom JSON file.
 
-    Paramaters:
-    ----------
-    message:
-        The message that should be scanned for any language that matches
-        any of the language that the filter is looking for. This value
-        should be passed in as a string.
+        Returns:
+            :class:`pathlib.Path`: A path object to the custom json file.
+        """
 
-    Returns:
-    -------
-        Returns a `bool` value. True is returned if the filter found
-        something in the text provided. False is returned if the filter
-        did not find anything of interest in the text provided.
-    """
+        if not self._use_custom_file:
+            raise RuntimeError("A custom JSON file to use was never provided")
 
-    if not setup_finished:
-        setup()
+        return self.custom_json_file
 
-    filterContentFile = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), 'data/filter.json')
-
-    return defaultCheck(message, customWordList, exceptionList, additionalList,
-                        useDefaultList, useCustomFile, replacement_table, filterContentFile)
-
-
-def checkMessageList(message):
-    """Checks the provided message for any words that should be filtered and
-    returns a list of words that were identified with some data about the word.
-
-    Paramaters:
-    ----------
-    message:
-        The message that should be scanned for any language that matches
-        any of the language that the filter is looking for. This value
-        should be passed in as a string.
-
-    Returns:
-    -------
-        Returns a list value. List with words found, count of the words
-        found, and a censored version of the words is returned if the filter
-        found something in the text provided. False is returned if the filter
-        did not find anything of interest in the text provided.
-    """
-
-    if not setup_finished:
-        setup()
-
-    filterContentFile = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), 'data/filter.json')
-
-    return listCheck(message, customWordList, exceptionList, additionalList,
-                     useDefaultList, useCustomFile, replacement_table, filterContentFile)
+    def __repr__(self):
+        return "<Filter: custom_list={custom_list}, list_file={lf_apostrophe}{list_file}{lf_apostrophe}>".format(
+            custom_list=self.custom_list,
+            list_file=self.custom_json_file,
+            lf_apostrophe="'" if self.custom_json_file else "",
+        )
