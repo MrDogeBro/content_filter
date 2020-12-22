@@ -261,7 +261,7 @@ class Check:
                             }
                         )
 
-        to_remove: list = []
+        to_remove = [] # type: list
 
         for match in words_found:
             if [w["word"] for w in words_found].count(match["word"]) > 1:
