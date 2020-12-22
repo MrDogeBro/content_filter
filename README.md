@@ -34,7 +34,7 @@ py -3 -m pip install content-filter
 
 ## Contributing
 
-If you are interested in contributing to Content Filter, please check out our [contribution guide](CONTRIBUTING.md) before you get started. Thanks for your interest!
+If you are interested in contributing to Content Filter, please check out our [contribution guide](https://github.com/MrDogeBro/content_filter/blob/master/CONTRIBUTING.md) before you get started. Thanks for your interest!
 
 ## License
 
