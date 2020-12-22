@@ -66,7 +66,7 @@ class Check:
 
         if self._use_default_list:
             # gets all of the words to filter for
-            with open(self._filter_file) as f:
+            with open(str(self._filter_file)) as f:
                 filter_data = json.load(f)
 
         elif self._use_custom_file:
@@ -84,7 +84,7 @@ class Check:
 
                 else:
                     # gets default list of words
-                    with open(self._filter_file) as f:
+                    with open(str(self._filter_file)) as f:
                         default_list = json.load(f)
 
                     # goes through all of the words in the filter and checks if any are in the message

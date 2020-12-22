@@ -49,7 +49,7 @@ class Filter:
             Path(__file__).resolve().parent, "data/replacements.json"
         )
 
-        with open(translations_file) as f:
+        with open(str(translations_file)) as f:
             loaded_translations = json.load(f)
 
         self._translation_table = {
@@ -71,7 +71,7 @@ class Filter:
                     + self.custom_json_file.suffix
                 )
 
-            with open(self.custom_json_file) as f:
+            with open(str(self.custom_json_file)) as f:
                 self._use_custom_file = json.load(f)
 
             self._use_default_list = False
@@ -161,7 +161,7 @@ class Filter:
         if not self._use_custom_file:
             raise RuntimeError("A custom JSON file to use was never provided")
 
-        with open(self.custom_json_file) as f:
+        with open(str(self.custom_json_file)) as f:
             self._use_custom_file = json.load(f)
 
     def check(self, message: str) -> Check:
