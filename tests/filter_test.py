@@ -336,7 +336,7 @@ class TestFilter(unittest.TestCase):
         self.assertEqual(filter.check("pussy").as_bool, False)
         self.assertEqual(filter.check("dick").as_bool, False)
 
-    def custom_fie_test(self):
+    def custom_file_test(self):
         filter = Filter(list_file='./tests/file_test.json')
 
         self.assertEqual(filter.check("fuck").as_bool, False)
