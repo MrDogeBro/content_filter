@@ -148,6 +148,7 @@ class Check:
                     if word_found:
                         words_found.append(
                             {
+                                "find": word["find"],
                                 "word": word["word"],
                                 "censored": word["censored"],
                                 "count": len(word_found),
@@ -188,6 +189,7 @@ class Check:
                             ]
                             words_found.append(
                                 {
+                                    "find": word["find"],
                                     "word": word["word"],
                                     "censored": word["censored"],
                                     "count": len(word_found_regex),
@@ -207,6 +209,7 @@ class Check:
                             ]
                             words_found.append(
                                 {
+                                    "find": word["find"],
                                     "word": word["word"],
                                     "censored": word["censored"],
                                     "count": len(word_found_regex),
