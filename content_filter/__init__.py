@@ -12,12 +12,12 @@ license: MIT, see LICENSE for more details.
 
 """
 
-__title__ = 'content-filter'
-__description__ = 'A basic but robust content filter for python.'
-__author__ = 'MrDogeBro'
+__title__ = "content-filter"
+__description__ = "A basic but robust content filter for python."
+__author__ = "MrDogeBro"
 
-__version__ = '2.0.0'
-__license__ = 'MIT'
-__copyright__ = 'Copyright 2020-2020 MrDogeBro'
+__version__ = "2.1.0"
+__license__ = "MIT"
+__copyright__ = "Copyright 2020-2020 MrDogeBro"
 
 from content_filter.filter import Filter

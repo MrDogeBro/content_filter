@@ -148,10 +148,12 @@ class Check:
                     if word_found:
                         words_found.append(
                             {
+                                "find": word["find"],
                                 "word": word["word"],
                                 "censored": word["censored"],
                                 "count": len(word_found),
                                 "indexes": word_found,
+                                "filter": "mainFilter"
                             }
                         )
 
@@ -170,6 +172,7 @@ class Check:
                                 "word": word,
                                 "count": len(word_found),
                                 "indexes": word_found,
+                                "filter": "additonalList"
                             }
                         )
 
@@ -188,10 +191,12 @@ class Check:
                             ]
                             words_found.append(
                                 {
+                                    "find": word["find"],
                                     "word": word["word"],
                                     "censored": word["censored"],
                                     "count": len(word_found_regex),
                                     "indexes": word_found_regex,
+                                    "filter": "conditionFilter"
                                 }
                             )
                     else:
@@ -207,10 +212,12 @@ class Check:
                             ]
                             words_found.append(
                                 {
+                                    "find": word["find"],
                                     "word": word["word"],
                                     "censored": word["censored"],
                                     "count": len(word_found_regex),
                                     "indexes": word_found_regex,
+                                    "filter": "conditionFilter"
                                 }
                             )
 
@@ -240,6 +247,7 @@ class Check:
                                 "word": word,
                                 "count": len(word_found),
                                 "indexes": word_found,
+                                "filter": "customList"
                             }
                         )
 
@@ -258,6 +266,7 @@ class Check:
                                 "word": word,
                                 "count": len(word_found),
                                 "indexes": word_found,
+                                "filter": "additonalList"
                             }
                         )
 
