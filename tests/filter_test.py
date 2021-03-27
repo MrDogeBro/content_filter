@@ -211,23 +211,23 @@ class TestFilter(unittest.TestCase):
         filter = Filter()
 
         self.assertEqual(filter.check("You always look best when your nude!").as_list, [
-            {'find': 'nude', 'word': 'nude', 'censored': 'nud3', 'count': 1, 'indexes': [(25, 29)]}])
+            {'find': 'nude', 'word': 'nude', 'censored': 'nud3', 'count': 1, 'indexes': [(25, 29)], 'filter': 'mainFilter'}])
         self.assertEqual(filter.check(
             "I met an interesting turtle while the song on the radio blasted away.").as_list, [])
         self.assertEqual(filter.check(
             "Hello there, how are you doing today?").as_list, [])
         self.assertEqual(filter.check(
-            "you wh0@r!").as_list, [{'find': 'hoar', 'word': 'hoar', 'censored': 'h0@r', 'count': 1, 'indexes': [(4, 8)]}, {'find': 'whoar', 'word': 'whore', 'censored': 'wh0r3', 'count': 1, 'indexes': [(3, 8)]}])
+            "you wh0@r!").as_list, [{'find': 'hoar', 'word': 'hoar', 'censored': 'h0@r', 'count': 1, 'indexes': [(4, 8)], 'filter': 'mainFilter'}, {'find': 'whoar', 'word': 'whore', 'censored': 'wh0r3', 'count': 1, 'indexes': [(3, 8)], 'filter': 'mainFilter'}])
         self.assertEqual(filter.check(
             "The skeleton had skeletons of his own in the closet.").as_list, [])
         self.assertEqual(filter.check("You would be a great p0rn star girl!").as_list, [
-            {'find': 'porn', 'word': 'porn', 'censored': 'p0rn', 'count': 1, 'indexes': [(16, 20)]}])
+            {'find': 'porn', 'word': 'porn', 'censored': 'p0rn', 'count': 1, 'indexes': [(16, 20)], 'filter': 'mainFilter'}])
         self.assertEqual(filter.check(
             "They throw cabbage that turns your brain into emotional baggage.").as_list, [])
         self.assertEqual(filter.check(
             "He had concluded that pigs must be able to fly in Hog Heaven.").as_list, [])
         self.assertEqual(filter.check("Don't be scared to drop dem panties girl").as_list, [
-            {'find': 'pantie', 'word': 'pantie', 'censored': 'p@nt!e', 'count': 1, 'indexes': [(21, 27)]}])
+            {'find': 'pantie', 'word': 'pantie', 'censored': 'p@nt!e', 'count': 1, 'indexes': [(21, 27)], 'filter': 'mainFilter'}])
         self.assertEqual(filter.check("Im good, hbu?").as_list, [])
 
     def filter_additions_test(self):
