@@ -26,7 +26,7 @@ For example, if you wanted to get a bool of wether the filter found anything, yo
     from content_filter import Filter
 
     filter = Filter()
-    
+
     filter.check('message here')
     # returns a Check object
 
@@ -45,7 +45,7 @@ These functions can be called multiple times for a single filter object.
     from content_filter import Filter
 
     filter = Filter()
-    
+
     filter.add_words(['word1', 'word2', 'word2'])
     # adds words to default filter
 
