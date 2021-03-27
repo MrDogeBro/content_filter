@@ -24,7 +24,7 @@ copyright = "2020, MrDogeBro"
 author = "MrDogeBro"
 
 # The full version, including alpha/beta/rc tags
-release = "2.0.0"
+release = "2.1.0"
 
 
 # -- General configuration ---------------------------------------------------
@@ -50,7 +50,7 @@ templates_path = ["_templates"]
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = [] # type: list
+exclude_patterns = []  # type: list
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -75,5 +75,5 @@ html_theme_options = {
 
 html_static_path = ["_static"]
 
-html_css_files = ["css/custom.css", 'css/dark.css']
+html_css_files = ["css/custom.css", "css/dark.css"]
 html_js_files = ["js/custom.js"]
