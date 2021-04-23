@@ -190,13 +190,19 @@
     "shell",
     "zooxanthella",
     "scunthorpe",
-    "asset"
+    "asset",
+    "nigeria"
   ],
   "conditionFilter": [
     { "find": "ass", "word": "ass", "censored": "@s$", "require_space": true },
     { "find": "as s", "word": "ass", "censored": "@s$", "require_space": true },
     { "find": "a ss", "word": "ass", "censored": "@s$", "require_space": true },
-    { "find": "a s s", "word": "ass", "censored": "@s$", "require_space": true },
+    {
+      "find": "a s s",
+      "word": "ass",
+      "censored": "@s$",
+      "require_space": true
+    },
     { "find": "azz", "word": "ass", "censored": "@s$", "require_space": true },
     { "find": "az z", "word": "ass", "censored": "@s$", "require_space": true },
     { "find": "z zz", "word": "ass", "censored": "@s$", "require_space": true },
