@@ -42,6 +42,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx_rtd_theme",
     "sphinx.ext.napoleon",
+    "sphinx_rtd_dark_mode",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,6 +52,8 @@ templates_path = ["_templates"]
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []  # type: list
+
+default_dark_mode = True
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -72,8 +75,3 @@ html_theme_options = {
     "includehidden": True,
     "titles_only": False,
 }
-
-html_static_path = ["_static"]
-
-html_css_files = ["css/custom.css", "css/dark.css"]
-html_js_files = ["js/custom.js"]
