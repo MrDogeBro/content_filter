@@ -10,6 +10,10 @@ Content Filter Documentation
    :alt: Build Status
    :target: https://travis-ci.com/github/MrDogeBro/content_filter
 
+.. image:: https://readthedocs.org/projects/content-filter/badge/?version=latest
+   :target: https://content-filter.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
 .. image:: https://img.shields.io/pypi/v/content-filter.svg
    :alt: PyPi version
    :target: https://pypi.python.org/pypi/content-filter/
@@ -21,10 +25,6 @@ Content Filter Documentation
 .. image:: https://img.shields.io/github/license/MrDogeBro/content_filter.svg
    :alt: License
    :target: https://github.com/MrDogeBro/content_filter/blob/master/LICENSE
-
-.. image:: https://readthedocs.org/projects/content-filter/badge/?version=latest
-  :target: https://content-filter.readthedocs.io/en/latest/?badge=latest
-  :alt: Documentation Status
 
 Content Filter is a basic but robust content filter for python. Content Filter allows you to easily detect language in a message and offers great customizability.
 
@@ -49,7 +49,7 @@ User Guide
    user/quickstart
    user/usage
    user/examples
-   
+
 API Docs
 --------
 
