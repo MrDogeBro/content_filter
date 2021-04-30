@@ -1,6 +1,6 @@
 # Python Content Filter
 
-[![Build Status](https://travis-ci.com/MrDogeBro/content_filter.svg?token=K4YBJnRBuxqyhssWYMJt&branch=master)](https://travis-ci.com/github/MrDogeBro/content_filter) [![PyPi version](https://img.shields.io/pypi/v/content-filter.svg)](https://pypi.python.org/pypi/content-filter/) [![PyPI pyversions](https://img.shields.io/pypi/pyversions/content-filter.svg)](https://pypi.python.org/pypi/content-filter/) [![](https://img.shields.io/github/license/MrDogeBro/content_filter.svg)](https://github.com/MrDogeBro/content_filter/blob/master/LICENSE)
+[![Build Status](https://travis-ci.com/MrDogeBro/content_filter.svg?token=K4YBJnRBuxqyhssWYMJt&branch=master)](https://travis-ci.com/github/MrDogeBro/content_filter) [![Documentation Status](https://readthedocs.org/projects/content-filter/badge/?version=latest)](https://content-filter.readthedocs.io/en/latest/?badge=latest) [![PyPi version](https://img.shields.io/pypi/v/content-filter.svg)](https://pypi.python.org/pypi/content-filter/) [![PyPI pyversions](https://img.shields.io/pypi/pyversions/content-filter.svg)](https://pypi.python.org/pypi/content-filter/) [![](https://img.shields.io/github/license/MrDogeBro/content_filter.svg)](https://github.com/MrDogeBro/content_filter/blob/master/LICENSE)
 
 Content Filter is a basic but robust content filter for python. Content Filter allows you to easily detect language in a message and offers great customizability.
 
