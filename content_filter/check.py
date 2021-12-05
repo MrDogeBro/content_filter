@@ -7,7 +7,7 @@ Checks message to see if they contain any words in the filter
 import json
 import re
 
-from content_filter.string import return_translated, return_possibilities
+from content_filter.string import return_possibilities, return_translated
 
 
 class Check:
@@ -153,7 +153,7 @@ class Check:
                                 "censored": word["censored"],
                                 "count": len(word_found),
                                 "indexes": word_found,
-                                "filter": "mainFilter"
+                                "filter": "mainFilter",
                             }
                         )
 
@@ -172,7 +172,7 @@ class Check:
                                 "word": word,
                                 "count": len(word_found),
                                 "indexes": word_found,
-                                "filter": "additonalList"
+                                "filter": "additonalList",
                             }
                         )
 
@@ -196,7 +196,7 @@ class Check:
                                     "censored": word["censored"],
                                     "count": len(word_found_regex),
                                     "indexes": word_found_regex,
-                                    "filter": "conditionFilter"
+                                    "filter": "conditionFilter",
                                 }
                             )
                     else:
@@ -217,7 +217,7 @@ class Check:
                                     "censored": word["censored"],
                                     "count": len(word_found_regex),
                                     "indexes": word_found_regex,
-                                    "filter": "conditionFilter"
+                                    "filter": "conditionFilter",
                                 }
                             )
 
@@ -247,7 +247,7 @@ class Check:
                                 "word": word,
                                 "count": len(word_found),
                                 "indexes": word_found,
-                                "filter": "customList"
+                                "filter": "customList",
                             }
                         )
 
@@ -266,11 +266,11 @@ class Check:
                                 "word": word,
                                 "count": len(word_found),
                                 "indexes": word_found,
-                                "filter": "additonalList"
+                                "filter": "additonalList",
                             }
                         )
 
-        to_remove = [] # type: list
+        to_remove = []  # type: list
 
         for match in words_found:
             if [w["word"] for w in words_found].count(match["word"]) > 1:
