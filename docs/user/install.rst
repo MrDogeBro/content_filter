@@ -1,7 +1,7 @@
 Installing Content Filter
 =========================
 
-**Python 3.4 or higher is required**
+**Python 3.6 or higher is required**
 
 To install Content Filter, enter the following command in any sort of terminal window or command prompt.
 

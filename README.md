@@ -16,7 +16,7 @@ Content Filter is a basic but robust content filter for python. Content Filter a
 
 ## Installation
 
-**Python 3.4 or higher is required**
+**Python 3.6 or higher is required**
 
 To install Content Filter, enter the following command in any sort of terminal window or command prompt.
 
