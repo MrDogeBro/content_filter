@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 
 project = "Content Filter"
-copyright = "2020, MrDogeBro"
+copyright = "2020-2021, MrDogeBro"
 author = "MrDogeBro"
 
 # The full version, including alpha/beta/rc tags
