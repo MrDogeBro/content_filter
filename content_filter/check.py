@@ -6,8 +6,12 @@ Checks message to see if they contain any words in the filter
 
 import json
 import re
+import typing as t
 
 from content_filter.string import return_possibilities, return_translated
+
+if t.TYPE_CHECKING:
+    from pathlib import Path
 
 
 class Check:
@@ -16,15 +20,15 @@ class Check:
 
     def __init__(
         self,
-        message,
-        exception_list,
-        additional_list,
-        custom_list,
-        use_default_list,
-        use_custom_file,
-        translation_table,
-        filter_file,
-    ):
+        message: str,
+        exception_list: t.List[str],
+        additional_list: t.List[str],
+        custom_list: t.List[str],
+        use_default_list: bool,
+        use_custom_file: t.Dict[str, t.Any],
+        translation_table: t.Dict[str, t.Any],
+        filter_file: "Path",
+    ) -> None:
         self.message = message
         self._exception_list = exception_list
         self._additional_list = additional_list
@@ -47,7 +51,7 @@ class Check:
         return bool(self._check_results)
 
     @property
-    def as_list(self) -> list:
+    def as_list(self) -> t.List[t.Dict[str, t.Any]]:
         """Outputs the check results as a list.
 
         Returns:
@@ -56,9 +60,9 @@ class Check:
 
         return self._check_results
 
-    def _check_message(self) -> list:
-        words_found = []
-        filter_data = {}
+    def _check_message(self) -> t.List[t.Dict[str, t.Any]]:
+        words_found: t.List[t.Dict[str, t.Any]] = []
+        filter_data: t.Dict[str, t.Any] = {}
 
         # sets up a var that will be used to look for words in that replaces all irregular charaters with the charater they might be used for as a bad word
         msg_content = return_translated(self._translation_table, self.message.lower())
@@ -270,7 +274,7 @@ class Check:
                             }
                         )
 
-        to_remove = []  # type: list
+        to_remove: t.List[t.Dict[str, t.Any]] = []
 
         for match in words_found:
             if [w["word"] for w in words_found].count(match["word"]) > 1:
@@ -295,5 +299,5 @@ class Check:
 
         return words_found
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "<Check: message='{message}'>".format(message=self.message)

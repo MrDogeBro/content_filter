@@ -12,6 +12,8 @@ license: MIT, see LICENSE for more details.
 
 """
 
+__all__ = ("Filter",)
+
 __title__ = "content-filter"
 __description__ = "A basic but robust content filter for python."
 __author__ = "MrDogeBro"

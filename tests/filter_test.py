@@ -4,7 +4,7 @@ from content_filter import Filter
 
 
 class TestFilter(unittest.TestCase):
-    def accuracy_test(self):
+    def accuracy_test(self) -> None:
         filter = Filter()
 
         self.assertEqual(filter.check("FUCK YOU BITCH").as_bool, True)
@@ -479,7 +479,7 @@ class TestFilter(unittest.TestCase):
         )
         self.assertEqual(filter.check("scunthorpe").as_bool, False)
 
-    def filter_list_test(self):
+    def filter_list_test(self) -> None:
         filter = Filter()
 
         self.assertEqual(
@@ -571,7 +571,7 @@ class TestFilter(unittest.TestCase):
         )
         self.assertEqual(filter.check("Im good, hbu?").as_list, [])
 
-    def filter_additions_test(self):
+    def filter_additions_test(self) -> None:
         filter = Filter()
 
         self.assertEqual(filter.check("Lets go the the raveEEEEEE!!!!").as_bool, False)
@@ -641,7 +641,7 @@ class TestFilter(unittest.TestCase):
             False,
         )
 
-    def filter_exceptions_test(self):
+    def filter_exceptions_test(self) -> None:
         filter = Filter()
 
         self.assertEqual(filter.check("what da fuuuuuuck!").as_bool, True)
@@ -682,7 +682,7 @@ class TestFilter(unittest.TestCase):
         )
         self.assertEqual(filter.check("This person is crazzzzy!").as_bool, False)
 
-    def custom_filter_test(self):
+    def custom_filter_test(self) -> None:
         filter = Filter(word_list=["testing", "check", "wtf", "how u"])
 
         self.assertEqual(filter.check("fuck").as_bool, False)
@@ -698,7 +698,7 @@ class TestFilter(unittest.TestCase):
         self.assertEqual(filter.check("pussy").as_bool, False)
         self.assertEqual(filter.check("dick").as_bool, False)
 
-    def custom_file_test(self):
+    def custom_file_test(self) -> None:
         filter = Filter(list_file="./tests/file_test.json")
 
         self.assertEqual(filter.check("fuck").as_bool, False)

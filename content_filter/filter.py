@@ -5,6 +5,7 @@ The main file that is the hub of all operations
 """
 
 import json
+import typing as t
 from pathlib import Path
 
 from content_filter.check import Check
@@ -27,18 +28,20 @@ class Filter:
         ValueError: The custom file input is not a JSON file.
     """
 
-    def __init__(self, list_file=None, word_list=None):
-        self.exception_list = []  # type: list
-        self.additional_list = []  # type: list
+    def __init__(
+        self,
+        list_file: t.Optional[str] = None,
+        word_list: t.Optional[t.List[str]] = None,
+    ):
+        self.exception_list: t.List[str] = []
+        self.additional_list: t.List[str] = []
         self.custom_list = (
             [word.replace(" ", "") for word in word_list]
             if isinstance(word_list, list)
             else []
         )
         self._use_default_list = True
-        self._use_custom_file = False
-        self.custom_json_file = None
-        self._translation_table = None
+        self._use_custom_file: t.Dict[str, t.Any] = {}
         self._filter_file = Path.joinpath(
             Path(__file__).resolve().parent, "data/filter.json"
         )
@@ -50,7 +53,7 @@ class Filter:
         )
 
         with open(str(translations_file)) as f:
-            loaded_translations = json.load(f)
+            loaded_translations: t.Dict[str, t.Dict[str, str]] = json.load(f)
 
         self._translation_table = {
             "single": str.maketrans(loaded_translations["single_char"]),
@@ -107,10 +110,10 @@ class Filter:
             return_translated(self._translation_table, i) for i in self.additional_list
         ]
 
-    def _check_type(self, obj: list) -> bool:
+    def _check_type(self, obj: t.List[t.Any]) -> bool:
         return bool(obj) and all(isinstance(elem, str) for elem in obj)
 
-    def add_exceptions(self, words: list) -> None:
+    def add_exceptions(self, words: t.List[str]) -> None:
         """Allows the user to remove words to the list of pre-defined words
         to filter for.
 
@@ -130,7 +133,7 @@ class Filter:
         self._lists_to_lower()
         self._lists_translate()
 
-    def add_words(self, words: list) -> None:
+    def add_words(self, words: t.List[str]) -> None:
         """Allows the user to add words to the list of pre-defined words
         to filter for.
 
@@ -207,7 +210,7 @@ class Filter:
 
         return self.custom_json_file
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "<Filter: custom_list={custom_list}, list_file={lf_apostrophe}{list_file}{lf_apostrophe}>".format(
             custom_list=self.custom_list,
             list_file=self.custom_json_file,
