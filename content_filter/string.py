@@ -4,17 +4,19 @@ translations.py
 Handles the translations of charaters in messages
 """
 
-from itertools import combinations
 import re
+from itertools import combinations
 from unicodedata import normalize
 
 
 def return_translated(translation_table: dict, string: str):
-    translated_str = string.translate(translation_table['single'])
-    translated_str = normalize('NFKD', translated_str).encode(
-        'ascii', 'ignore').decode().lower()
-    translated_str = re.compile('|'.join(map(re.escape, translation_table['multi']))).sub(
-        lambda match: translation_table['multi'][match.group(0)], translated_str)
+    translated_str = string.translate(translation_table["single"])
+    translated_str = (
+        normalize("NFKD", translated_str).encode("ascii", "ignore").decode().lower()
+    )
+    translated_str = re.compile(
+        "|".join(map(re.escape, translation_table["multi"]))
+    ).sub(lambda match: translation_table["multi"][match.group(0)], translated_str)
 
     return translated_str
 
@@ -25,7 +27,7 @@ def return_possibilities(message):
     combos = []
     results = []
 
-    found_statements = re.findall(r'(?<=\().+?(?=\))', message)
+    found_statements = re.findall(r"(?<=\().+?(?=\))", message)
 
     for statement in found_statements:
         chars.append((statement[:1], statement[2:]))
@@ -50,7 +52,10 @@ def return_possibilities(message):
 
         for index, letter in enumerate(combo):
             modified_message = modified_message.replace(
-                '({found_statements})'.format(found_statements=found_statements[index]), letter, 1)
+                "({found_statements})".format(found_statements=found_statements[index]),
+                letter,
+                1,
+            )
 
         results.append(modified_message)
 
