@@ -18,7 +18,7 @@ __title__ = "content-filter"
 __description__ = "A basic but robust content filter for python."
 __author__ = "MrDogeBro"
 
-__version__ = "2.1.0"
+__version__ = "2.2.0"
 __license__ = "MIT"
 __copyright__ = "Copyright 2020-2021 MrDogeBro"
 
