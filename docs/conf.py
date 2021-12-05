@@ -8,6 +8,7 @@
 
 import os
 import sys
+import typing as t
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -52,7 +53,7 @@ templates_path = ["_templates"]
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []  # type: list
+exclude_patterns: t.List[str] = []
 
 default_dark_mode = True
 
